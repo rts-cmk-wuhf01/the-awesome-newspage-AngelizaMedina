@@ -9,13 +9,13 @@
     <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>The News Paper - News & Lifestyle Magazine Template</title>
+    <%- include("partials/head/title.ejs") %>
     
     <!-- Favicon -->
-    <link rel="icon" href="img/core-img/favicon.ico">
+    <%- include("partials/head/favicon.ejs") %>
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <%- include("partials/head/style.ejs") %>
 
 </head>
 
@@ -24,36 +24,7 @@
     <header class="header-area">
 
         <!-- Top Header Area -->
-        <div class="top-header-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="top-header-content d-flex align-items-center justify-content-between">
-                            <!-- Logo -->
-                            <div class="logo">
-                                <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-                            </div>
-
-                            <!-- Login Search Area -->
-                            <div class="login-search-area d-flex align-items-center">
-                                <!-- Login -->
-                                <div class="login d-flex">
-                                    <a href="#">Login</a>
-                                    <a href="#">Register</a>
-                                </div>
-                                <!-- Search Form -->
-                                <div class="search-form">
-                                    <form action="#" method="post">
-                                        <input type="search" name="search" class="form-control" placeholder="Search">
-                                        <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%- include("partials/header/top-header-area.ejs") %>
 
         <!-- Navbar Area -->
         <div class="newspaper-main-menu" id="stickyMenu">
@@ -64,7 +35,7 @@
 
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                            <a href="http://localhost:3000/home"><img src="img/core-img/logo.png" alt=""></a>
                         </div>
 
                         <!-- Navbar Toggler -->
@@ -83,21 +54,21 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li class="active"><a href="index.html">Home</a></li>
+                                    <li class="active"><a href="http://localhost:3000/home">Home</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Home</a></li>
-                                            <li><a href="catagories-post.html">Catagories</a></li>
-                                            <li><a href="single-post.html">Single Articles</a></li>
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="contact.html">Contact</a></li>
+                                            <li><a href="http://localhost:3000/">Home</a></li>
+                                            <li><a href="http://localhost:3000/catagories-post">Catagories</a></li>
+                                            <li><a href="http://localhost:3000/single-post">Single Articles</a></li>
+                                            <li><a href="http://localhost:3000/about">About Us</a></li>
+                                            <li><a href="http://localhost:3000/contact">Contact</a></li>
                                             <li><a href="#">Dropdown</a>
                                                 <ul class="dropdown">
-                                                    <li><a href="index.html">Home</a></li>
-                                                    <li><a href="catagories-post.html">Catagories</a></li>
-                                                    <li><a href="single-post.html">Single Articles</a></li>
-                                                    <li><a href="about.html">About Us</a></li>
-                                                    <li><a href="contact.html">Contact</a></li>
+                                                    <li><a href="http://localhost:3000/home">Home</a></li>
+                                                    <li><a href="http://localhost:3000/catagories-post">Catagories</a></li>
+                                                    <li><a href="http://localhost:3000/single-post">Single Articles</a></li>
+                                                    <li><a href="http://localhost:3000/about">About Us</a></li>
+                                                    <li><a href="http://localhost:3000/contact">Contact</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -106,7 +77,15 @@
                                         <div class="megamenu">
                                             <ul class="single-mega cn-col-4">
                                                 <li class="title">Catagories</li>
-                                                <li><a href="index.html">Home</a></li>
+                                                <li><a href="http://localhost:3000/home">Home</a></li>
+                                                <li><a href="http://localhost:3000/catagories-post">Catagories</a></li>
+                                                <li><a href="http://localhost:3000/single-post">Single Articles</a></li>
+                                                <li><a href="http://localhost:3000/about">About Us</a></li>
+                                                <li><a href="http://localhost:3000/contact">Contact</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li class="title">Catagories</li>
+                                                <li><a href="http://localhost:3000/home">Home</a></li>
                                                 <li><a href="catagories-post.html">Catagories</a></li>
                                                 <li><a href="single-post.html">Single Articles</a></li>
                                                 <li><a href="about.html">About Us</a></li>
@@ -114,15 +93,7 @@
                                             </ul>
                                             <ul class="single-mega cn-col-4">
                                                 <li class="title">Catagories</li>
-                                                <li><a href="index.html">Home</a></li>
-                                                <li><a href="catagories-post.html">Catagories</a></li>
-                                                <li><a href="single-post.html">Single Articles</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                                <li><a href="contact.html">Contact</a></li>
-                                            </ul>
-                                            <ul class="single-mega cn-col-4">
-                                                <li class="title">Catagories</li>
-                                                <li><a href="index.html">Home</a></li>
+                                                <li><a href="http://localhost:3000/home">Home</a></li>
                                                 <li><a href="catagories-post.html">Catagories</a></li>
                                                 <li><a href="single-post.html">Single Articles</a></li>
                                                 <li><a href="about.html">About Us</a></li>
