@@ -1,6 +1,6 @@
 module.exports = (app) => {
 
-   app.get('/home', (req, res, next) => {
+   app.get('/', (req, res, next) => {
       res.render('home');
    });
 
