@@ -74,7 +74,42 @@ module.exports = (app) => {
 
    app.get('/about', (req, res, next) => {
 
-      res.render('about');
+		let teamMembers = [
+			{
+				'name': 'James Williams',
+				'img': 'img/bg-img/t1.jpg'
+			},
+			{
+				'name': 'Christinne Smith',
+				'img': 'img/bg-img/t2.jpg'
+			},
+			{
+				'name': 'Alicia Dormund',
+				'img': 'img/bg-img/t3.jpg'
+			},
+			{
+				'name': 'Steve Duncan',
+				'img': 'img/bg-img/t4.jpg'
+			},
+			{
+				'name': 'James Williams',
+				'img': 'img/bg-img/t5.jpg'
+			},
+			{
+				'name': 'Christinne Smith',
+				'img': 'img/bg-img/t6.jpg'
+			},
+			{
+				'name': 'Alicia Dormund',
+				'img': 'img/bg-img/t7.jpg'
+			},
+			{
+				'name': 'Steve Duncan',
+				'img': 'img/bg-img/t8.jpg'
+			},
+		];
+
+      res.render('about', {teamMembers});
    });
 
    app.get('/categories-post', (req, res, next) => {
