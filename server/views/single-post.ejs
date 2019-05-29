@@ -241,63 +241,17 @@
                         <div class="latest-posts-widget mb-50">
 
 														<!-- Single Featured Posts -->
-														<%- include("partials/single-featured-posts.ejs") %>
+														<%- include("partials/asides/single-featured-posts.ejs") %>
                         </div>
 
                         <!-- Popular News Widget -->
-                        <%- include("partials/most-popular-news-widget.ejs") %>
+                        <%- include("partials/asides/most-popular-news-widget.ejs") %>
 
                         <!-- Newsletter Widget -->
-                        <%- include("partials/newsletter-widget.ejs") %>
+                        <%- include("partials/asides/newsletter-widget.ejs") %>
 
                         <!-- Latest Comments Widget -->
-                        <div class="latest-comments-widget">
-                            <h3>Latest Comments</h3>
-
-                            <!-- Single Comments -->
-                            <div class="single-comments d-flex">
-                                <div class="comments-thumbnail mr-15">
-                                    <img src="img/bg-img/29.jpg" alt="">
-                                </div>
-                                <div class="comments-text">
-                                    <a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-                                    <p>06:34 am, April 14, 2018</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Comments -->
-                            <div class="single-comments d-flex">
-                                <div class="comments-thumbnail mr-15">
-                                    <img src="img/bg-img/30.jpg" alt="">
-                                </div>
-                                <div class="comments-text">
-                                    <a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-                                    <p>06:34 am, April 14, 2018</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Comments -->
-                            <div class="single-comments d-flex">
-                                <div class="comments-thumbnail mr-15">
-                                    <img src="img/bg-img/31.jpg" alt="">
-                                </div>
-                                <div class="comments-text">
-                                    <a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-                                    <p>06:34 am, April 14, 2018</p>
-                                </div>
-                            </div>
-
-                            <!-- Single Comments -->
-                            <div class="single-comments d-flex">
-                                <div class="comments-thumbnail mr-15">
-                                    <img src="img/bg-img/32.jpg" alt="">
-                                </div>
-                                <div class="comments-text">
-                                    <a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-                                    <p>06:34 am, April 14, 2018</p>
-                                </div>
-                            </div>
-                        </div>
+                        <%- include("partials/asides/latest-comments-widget.ejs") %>
                     </div>
                 </div>
             </div>
@@ -312,16 +266,7 @@
     <!-- ##### Footer Area Start ##### -->
 
     <!-- ##### All Javascript Files ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
+    <%- include("partials/javascript.ejs") %>
 </body>
 
 </html>

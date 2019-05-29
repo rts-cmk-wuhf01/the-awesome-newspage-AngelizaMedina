@@ -16,7 +16,6 @@
 
     <!-- Core Stylesheet -->
     <%- include("partials/head/style.ejs") %>
-
 </head>
 
 <body>
@@ -24,7 +23,17 @@
     <header class="header-area">
 
         <!-- Top Header Area -->
-        <%- include("partials/header/top-header-area.ejs") %>
+				<%- include("partials/header/top-header-area.ejs") %>
+				<% products.forEach(product => { %>
+					
+					<div>
+						<h2><%= product.name %></h2>
+			
+						<p><%= product.price %> kr</p>
+					</div>
+				
+				
+				<% }); %>
 
         <!-- Navbar Area -->
 				<%- include("partials/header/navbarArea.ejs") %>
@@ -45,8 +54,8 @@
                 <div class="col-12 col-md-6 col-lg-8">
                     <div class="row">
 
-                        <!-- Single Featured Post -->
                         <div class="col-12 col-lg-7">
+														<!-- Single Featured Post -->
                             <div class="single-blog-post featured-post">
                                 <div class="post-thumb">
                                     <a href="#"><img src="img/bg-img/16.jpg" alt=""></a>
@@ -127,7 +136,7 @@
 
                 <div class="col-12 col-md-6 col-lg-4">
 									 <!-- Single Featured Posts -->
-									 <%- include("partials/single-featured-posts.ejs") %>
+									 <%- include("partials/asides/single-featured-posts.ejs") %>
                 </div>
             </div>
         </div>
@@ -240,10 +249,10 @@
                         <h6>Info</h6>
                     </div>
                     <!-- Popular News Widget -->
-										<%- include("partials/most-popular-news-widget.ejs") %>
+										<%- include("partials/asides/most-popular-news-widget.ejs") %>
 
                     <!-- Newsletter Widget -->
-                    <%- include("partials/newsletter-widget.ejs") %>
+                    <%- include("partials/asides/newsletter-widget.ejs") %>
                 </div>
             </div>
         </div>
@@ -518,16 +527,7 @@
     <!-- ##### Footer Area End ##### -->
 
     <!-- ##### All Javascript Files ##### -->
-    <!-- jQuery-2.2.4 js -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/bootstrap/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="js/plugins/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
+    <%- include("partials/javascript.ejs") %>
 </body>
 
 </html>
