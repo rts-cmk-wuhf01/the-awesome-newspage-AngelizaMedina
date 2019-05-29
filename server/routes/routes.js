@@ -24,9 +24,24 @@ module.exports = (app) => {
 				'title': 'Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...',
 				'img': 'img/bg-img/15.jpg'
 			}
-		]
+		];
 
-      res.render('home', {popularNews});
+		let videoPosts = [
+			{
+				'img': 'img/bg-img/video1.jpg',
+				'videoHref': 'https://www.youtube.com/watch?v=5BQr-j3BBzU'
+			},
+			{
+				'img': 'img/bg-img/video2.jpg',
+				'videoHref': 'https://www.youtube.com/watch?v=5BQr-j3BBzU'
+			},
+			{
+				'img': 'img/bg-img/video3.jpg',
+				'videoHref': 'https://www.youtube.com/watch?v=5BQr-j3BBzU'
+			}
+		];
+
+      res.render('home', {popularNews, videoPosts});
    });
 
    app.get('/about', (req, res, next) => {
