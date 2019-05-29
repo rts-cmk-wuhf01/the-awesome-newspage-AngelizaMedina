@@ -5,23 +5,15 @@ module.exports = (app) => {
 
 		let popularNews = [
 			{
-				'category': 'FINANACE',
-				'title': 'Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...',
 				'img': 'img/bg-img/12.jpg'
 			},
 			{
-				'category': 'FINANACE',
-				'title': 'Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...',
 				'img': 'img/bg-img/13.jpg'
 			},
 			{
-				'category': 'FINANACE',
-				'title': 'Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...',
 				'img': 'img/bg-img/14.jpg'
 			},
 			{
-				'category': 'FINANACE',
-				'title': 'Dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo ac...',
 				'img': 'img/bg-img/15.jpg'
 			}
 		];
@@ -29,19 +21,55 @@ module.exports = (app) => {
 		let videoPosts = [
 			{
 				'img': 'img/bg-img/video1.jpg',
-				'videoHref': 'https://www.youtube.com/watch?v=5BQr-j3BBzU'
 			},
 			{
 				'img': 'img/bg-img/video2.jpg',
-				'videoHref': 'https://www.youtube.com/watch?v=5BQr-j3BBzU'
 			},
 			{
 				'img': 'img/bg-img/video3.jpg',
-				'videoHref': 'https://www.youtube.com/watch?v=5BQr-j3BBzU'
 			}
 		];
 
-      res.render('home', {popularNews, videoPosts});
+		let editorsPicks = [
+			{
+				'img': 'img/bg-img/1.jpg',
+			},
+			{
+				'img': 'img/bg-img/2.jpg',
+			},
+			{
+				'img': 'img/bg-img/3.jpg',
+			},
+			{
+				'img': 'img/bg-img/4.jpg',
+			},
+			{
+				'img': 'img/bg-img/5.jpg',
+			},
+			{
+				'img': 'img/bg-img/6.jpg',
+			},
+		];
+
+		let worldNewsPosts = [
+			{
+				'img': 'img/bg-img/7.jpg'
+			},
+			{
+				'img': 'img/bg-img/8.jpg'
+			},
+			{
+				'img': 'img/bg-img/9.jpg'
+			},
+			{
+				'img': 'img/bg-img/10.jpg'
+			},
+			{
+				'img': 'img/bg-img/11.jpg'
+			},
+		]
+
+      res.render('home', {popularNews, videoPosts, editorsPicks, worldNewsPosts});
    });
 
    app.get('/about', (req, res, next) => {
