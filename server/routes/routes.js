@@ -1,26 +1,8 @@
 module.exports = (app) => {
 
    app.get('/', (req, res, next) => {
-		 let products = [
-			 {
-				 'name': 'p1',
-				 'price': 100
-			 },
-
-			 {
-				'name': 'p2',
-				'price': 200
-			},
-
-			{
-				'name': 'p3',
-				'price': 300
-			}
-		 ];
-
-      res.render('home', {
-				'products': products
-			});
+		 
+      res.render('home');
    });
 
    app.get('/about', (req, res, next) => {
