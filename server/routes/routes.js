@@ -113,7 +113,13 @@ module.exports = (app) => {
    });
 
    app.get('/categories-post', (req, res, next) => {
-      res.render('categories-post');
+		 let latestComments = [
+			{
+				'date': '2018-04-14 06:34'
+			}
+		 ];
+
+      res.render('categories-post', {latestComments});
    });
 
    app.get('/single-post', (req, res, next) => {

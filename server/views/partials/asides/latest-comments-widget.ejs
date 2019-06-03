@@ -1,6 +1,10 @@
 <div class="latest-comments-widget">
 	<h3>Latest Comments</h3>
 
+	<% if(typeof latestComments != 'undefined') { %>
+	<% latestComments.forEach(comment => { %>
+	<% let commentDate = new Date(comment.date); %>
+
 	<!-- Single Comments -->
 	<div class="single-comments d-flex">
 			<div class="comments-thumbnail mr-15">
@@ -8,7 +12,7 @@
 			</div>
 			<div class="comments-text">
 					<a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-					<p>06:34 am, April 14, 2018</p>
+					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
 			</div>
 	</div>
 
@@ -19,7 +23,7 @@
 			</div>
 			<div class="comments-text">
 					<a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-					<p>06:34 am, April 14, 2018</p>
+					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
 			</div>
 	</div>
 
@@ -30,7 +34,7 @@
 			</div>
 			<div class="comments-text">
 					<a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-					<p>06:34 am, April 14, 2018</p>
+					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
 			</div>
 	</div>
 
@@ -41,7 +45,10 @@
 			</div>
 			<div class="comments-text">
 					<a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-					<p>06:34 am, April 14, 2018</p>
+					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
 			</div>
 	</div>
 </div>
+
+<% }); %>
+<% } %>
