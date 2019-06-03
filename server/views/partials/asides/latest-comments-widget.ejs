@@ -8,47 +8,15 @@
 	<!-- Single Comments -->
 	<div class="single-comments d-flex">
 			<div class="comments-thumbnail mr-15">
-					<img src="img/bg-img/29.jpg" alt="">
+					<img src="<%= comment.img %>" alt="">
 			</div>
 			<div class="comments-text">
-					<a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
+					<a href="#"><%= comment.name %> <span>on</span> Facebook is offering facial recognition...</a>
 					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
 			</div>
 	</div>
 
-	<!-- Single Comments -->
-	<div class="single-comments d-flex">
-			<div class="comments-thumbnail mr-15">
-					<img src="img/bg-img/30.jpg" alt="">
-			</div>
-			<div class="comments-text">
-					<a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
-			</div>
-	</div>
+	<% }) %>
+	<% } %>
 
-	<!-- Single Comments -->
-	<div class="single-comments d-flex">
-			<div class="comments-thumbnail mr-15">
-					<img src="img/bg-img/31.jpg" alt="">
-			</div>
-			<div class="comments-text">
-					<a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
-			</div>
-	</div>
-
-	<!-- Single Comments -->
-	<div class="single-comments d-flex">
-			<div class="comments-thumbnail mr-15">
-					<img src="img/bg-img/32.jpg" alt="">
-			</div>
-			<div class="comments-text">
-					<a href="#">Jamie Smith <span>on</span> Facebook is offering facial recognition...</a>
-					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
-			</div>
-	</div>
 </div>
-
-<% }); %>
-<% } %>

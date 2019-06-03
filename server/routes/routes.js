@@ -1,3 +1,30 @@
+let fourMostPopularNews = [
+	{
+		'number': '1.',
+		'txt': ' Amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales.',
+		'date': '2018-04-14'
+	},
+	{
+		'number': '2.',
+		'txt': ' Consectetur adipiscing elit. Nam eu metus sit amet odio sodales placer.',
+		'date': '2018-04-14'
+	},
+	{
+		'number': '3.',
+		'txt': ' Adipiscing elit. Nam eu metus sit amet odio sodales placer. Sed varius leo.',
+		'date': '2018-04-14'
+	},
+	{
+		'number': '4.',
+		'txt': ' Eu metus sit amet odio sodales placer. Sed varius leo ac...',
+		'date': '2018-04-14'
+	}
+];
+
+
+
+
+
 module.exports = (app) => {
 
 
@@ -69,7 +96,7 @@ module.exports = (app) => {
 			},
 		]
 
-      res.render('home', {popularNews, videoPosts, editorsPicks, worldNewsPosts});
+      res.render('home', {fourMostPopularNews, popularNews, videoPosts, editorsPicks, worldNewsPosts});
    });
 
    app.get('/about', (req, res, next) => {
@@ -113,17 +140,35 @@ module.exports = (app) => {
    });
 
    app.get('/categories-post', (req, res, next) => {
+
 		 let latestComments = [
 			{
+				'name': 'Jamie Smith',
+				'img': 'img/bg-img/29.jpg',
+				'date': '2018-04-14 06:34'
+			},
+			{
+				'name': 'Jamie Smith',
+				'img': 'img/bg-img/30.jpg',
+				'date': '2018-04-14 06:34'
+			},
+			{
+				'name': 'Jamie Smith',
+				'img': 'img/bg-img/31.jpg',
+				'date': '2018-04-14 06:34'
+			},
+			{
+				'name': 'Jamie Smith',
+				'img': 'img/bg-img/32.jpg',
 				'date': '2018-04-14 06:34'
 			}
 		 ];
 
-      res.render('categories-post', {latestComments});
+      res.render('categories-post', {fourMostPopularNews, latestComments});
    });
 
    app.get('/single-post', (req, res, next) => {
-      res.render('single-post');
+      res.render('single-post', {fourMostPopularNews});
    });
 
    app.get('/contact', (req, res, next) => {
