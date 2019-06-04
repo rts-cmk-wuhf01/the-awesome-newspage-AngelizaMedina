@@ -22,9 +22,71 @@ let fourMostPopularNews = [
 ];
 
 
+let singleFeaturedPosts = [
+	{
+		'category': 'finance',
+		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
+		'img': 'img/bg-img/19.jpg',
+		'date': '04-14 07:00'
+	},
+	{
+		'category': 'politics',
+		'txt': 'Sed a elit euismod augue semper congue sit amet ac sapien.',
+		'img': 'img/bg-img/20.jpg',
+		'date': '04-14 07:00'
+	},
+	{
+		'category': 'health',
+		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
+		'img': 'img/bg-img/21.jpg',
+		'date': '04-14 07:00'
+	},
+	{
+		'category': 'finance',
+		'txt': 'Augue semper congue sit amet ac sapien. Fusce consequat.',
+		'img': 'img/bg-img/22.jpg',
+		'date': '04-14 07:00'
+	},
+	{
+		'category': 'travel',
+		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
+		'img': 'img/bg-img/23.jpg',
+		'date': '04-14 07:00'
+	},
+	{
+		'category': 'politics',
+		'txt': 'Augue semper congue sit amet ac sapien. Fusce consequat.',
+		'img': 'img/bg-img/24.jpg',
+		'date': '04-14 07:00'
+	}
+];
 
 
+let latestComments = [
+	{
+		'name': 'Jamie Smith',
+		'img': 'img/bg-img/29.jpg',
+		'date': '2018-04-14 06:34'
+	},
+	{
+		'name': 'Jamie Smith',
+		'img': 'img/bg-img/30.jpg',
+		'date': '2018-04-14 06:34'
+	},
+	{
+		'name': 'Jamie Smith',
+		'img': 'img/bg-img/31.jpg',
+		'date': '2018-04-14 06:34'
+	},
+	{
+		'name': 'Jamie Smith',
+		'img': 'img/bg-img/32.jpg',
+		'date': '2018-04-14 06:34'
+	}
+ ];
 
+
+ 
 module.exports = (app) => {
 
 
@@ -60,43 +122,54 @@ module.exports = (app) => {
 		let editorsPicks = [
 			{
 				'img': 'img/bg-img/1.jpg',
+				'date': '2018-02-11'
 			},
 			{
 				'img': 'img/bg-img/2.jpg',
+				'date': '2018-02-11'
 			},
 			{
 				'img': 'img/bg-img/3.jpg',
+				'date': '2018-02-11'
 			},
 			{
 				'img': 'img/bg-img/4.jpg',
+				'date': '2018-02-11'
 			},
 			{
 				'img': 'img/bg-img/5.jpg',
+				'date': '2018-02-11'
 			},
 			{
 				'img': 'img/bg-img/6.jpg',
+				'date': '2018-02-11'
 			},
 		];
 
 		let worldNewsPosts = [
 			{
-				'img': 'img/bg-img/7.jpg'
+				'img': 'img/bg-img/7.jpg',
+				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/8.jpg'
+				'img': 'img/bg-img/8.jpg',
+				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/9.jpg'
+				'img': 'img/bg-img/9.jpg',
+				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/10.jpg'
+				'img': 'img/bg-img/10.jpg',
+				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/11.jpg'
+				'img': 'img/bg-img/11.jpg',
+				'date': '2018-02-11'
 			},
 		]
 
-      res.render('home', {fourMostPopularNews, popularNews, videoPosts, editorsPicks, worldNewsPosts});
+      res.render('home', {fourMostPopularNews, singleFeaturedPosts, popularNews, videoPosts, editorsPicks, worldNewsPosts});
    });
 
    app.get('/about', (req, res, next) => {
@@ -140,35 +213,11 @@ module.exports = (app) => {
    });
 
    app.get('/categories-post', (req, res, next) => {
-
-		 let latestComments = [
-			{
-				'name': 'Jamie Smith',
-				'img': 'img/bg-img/29.jpg',
-				'date': '2018-04-14 06:34'
-			},
-			{
-				'name': 'Jamie Smith',
-				'img': 'img/bg-img/30.jpg',
-				'date': '2018-04-14 06:34'
-			},
-			{
-				'name': 'Jamie Smith',
-				'img': 'img/bg-img/31.jpg',
-				'date': '2018-04-14 06:34'
-			},
-			{
-				'name': 'Jamie Smith',
-				'img': 'img/bg-img/32.jpg',
-				'date': '2018-04-14 06:34'
-			}
-		 ];
-
-      res.render('categories-post', {fourMostPopularNews, latestComments});
+      res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments});
    });
 
    app.get('/single-post', (req, res, next) => {
-      res.render('single-post', {fourMostPopularNews});
+      res.render('single-post', {fourMostPopularNews, singleFeaturedPosts, latestComments});
    });
 
    app.get('/contact', (req, res, next) => {
