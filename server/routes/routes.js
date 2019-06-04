@@ -273,7 +273,7 @@ module.exports = (app) => {
 				'title': 'Years Old',
 				'counter': 17,
 			}
-		]
+		];
 
 			res.render('about', {teamMembers, coolFacts});
 	});
