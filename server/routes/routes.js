@@ -86,7 +86,7 @@ let latestComments = [
  ];
 
 
- 
+
 module.exports = (app) => {
 
 
@@ -217,7 +217,17 @@ module.exports = (app) => {
    });
 
    app.get('/single-post', (req, res, next) => {
-      res.render('single-post', {fourMostPopularNews, singleFeaturedPosts, latestComments});
+
+		let relatedPosts = [
+			{
+				'img': 'img/bg-img/12.jpg'
+			},
+			{
+				'img': 'img/bg-img/13.jpg'
+			}
+		]
+
+      res.render('single-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, relatedPosts});
    });
 
    app.get('/contact', (req, res, next) => {
