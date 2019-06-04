@@ -174,50 +174,7 @@ module.exports = (app) => {
 	 
 	/*----------------------------------------------------- Home end -----------------------------------------------*/
 
-	/*------------------------------------------------------- About ------------------------------------------------*/
-   app.get('/about', (req, res, next) => {
-
-		let teamMembers = [
-			{
-				'name': 'James Williams',
-				'img': 'img/bg-img/t1.jpg'
-			},
-			{
-				'name': 'Christinne Smith',
-				'img': 'img/bg-img/t2.jpg'
-			},
-			{
-				'name': 'Alicia Dormund',
-				'img': 'img/bg-img/t3.jpg'
-			},
-			{
-				'name': 'Steve Duncan',
-				'img': 'img/bg-img/t4.jpg'
-			},
-			{
-				'name': 'James Williams',
-				'img': 'img/bg-img/t5.jpg'
-			},
-			{
-				'name': 'Christinne Smith',
-				'img': 'img/bg-img/t6.jpg'
-			},
-			{
-				'name': 'Alicia Dormund',
-				'img': 'img/bg-img/t7.jpg'
-			},
-			{
-				'name': 'Steve Duncan',
-				'img': 'img/bg-img/t8.jpg'
-			},
-		];
-
-      res.render('about', {teamMembers});
-	 });
-	 
-	/*----------------------------------------------------- About end ---------------------------------------------*/
-
-	/*-------------------------------------------------- Categories-post ------------------------------------------*/
+	/*-------------------------------------------------- Categories-post -------------------------------------------*/
    app.get('/categories-post', (req, res, next) => {
 
 		let singleFeaturedPosts2 = [
@@ -260,6 +217,68 @@ module.exports = (app) => {
 	 });
 	 
 	/*-------------------------------------------------- Single-post end ------------------------------------------*/
+
+	/*------------------------------------------------------- About ------------------------------------------------*/
+	app.get('/about', (req, res, next) => {
+
+		let teamMembers = [
+			{
+				'name': 'James Williams',
+				'img': 'img/bg-img/t1.jpg'
+			},
+			{
+				'name': 'Christinne Smith',
+				'img': 'img/bg-img/t2.jpg'
+			},
+			{
+				'name': 'Alicia Dormund',
+				'img': 'img/bg-img/t3.jpg'
+			},
+			{
+				'name': 'Steve Duncan',
+				'img': 'img/bg-img/t4.jpg'
+			},
+			{
+				'name': 'James Williams',
+				'img': 'img/bg-img/t5.jpg'
+			},
+			{
+				'name': 'Christinne Smith',
+				'img': 'img/bg-img/t6.jpg'
+			},
+			{
+				'name': 'Alicia Dormund',
+				'img': 'img/bg-img/t7.jpg'
+			},
+			{
+				'name': 'Steve Duncan',
+				'img': 'img/bg-img/t8.jpg'
+			},
+		];
+
+		let coolFacts = [
+			{
+				'title': 'News Article',
+				'counter': 12,
+			},
+			{
+				'title': 'Reporters',
+				'counter': 45,
+			},
+			{
+				'title': 'Awards Won',
+				'counter': 25,
+			},
+			{
+				'title': 'Years Old',
+				'counter': 17,
+			}
+		]
+
+			res.render('about', {teamMembers, coolFacts});
+	});
+	
+	/*----------------------------------------------------- About end ---------------------------------------------*/
 
 	/*------------------------------------------------------ Contact ----------------------------------------------*/
    app.get('/contact', (req, res, next) => {
