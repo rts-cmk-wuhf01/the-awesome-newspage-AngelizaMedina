@@ -89,7 +89,7 @@ let latestComments = [
 
 module.exports = (app) => {
 
-
+	/*-------------------------------------------------------- Home --------------------------------------------------*/
    app.get('/', (req, res, next) => {
 
 		let popularNews = [
@@ -170,8 +170,11 @@ module.exports = (app) => {
 		]
 
       res.render('home', {fourMostPopularNews, singleFeaturedPosts, popularNews, videoPosts, editorsPicks, worldNewsPosts});
-   });
+	 });
+	 
+	/*----------------------------------------------------- Home end -----------------------------------------------*/
 
+	/*------------------------------------------------------- About ------------------------------------------------*/
    app.get('/about', (req, res, next) => {
 
 		let teamMembers = [
@@ -210,12 +213,38 @@ module.exports = (app) => {
 		];
 
       res.render('about', {teamMembers});
-   });
+	 });
+	 
+	/*----------------------------------------------------- About end ---------------------------------------------*/
 
+	/*-------------------------------------------------- Categories-post ------------------------------------------*/
    app.get('/categories-post', (req, res, next) => {
-      res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments});
-   });
 
+		let singleFeaturedPosts2 = [
+			{
+				'title': 'Financial news: A new company is born today at the stock market',
+				'img': 'img/bg-img/25.jpg'
+			},
+			{
+				'title': 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat',
+				'img': 'img/bg-img/26.jpg'
+			},
+			{
+				'title': 'Most investors think 2018 is the peak year for stocks',
+				'img': 'img/bg-img/27.jpg'
+			},
+			{
+				'title': 'Facebook is offering facial recognition again in Europe',
+				'img': 'img/bg-img/28.jpg'
+			}			
+		];
+
+      res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
+	 });
+	 
+	/*------------------------------------------------ Categories-post end ----------------------------------------*/
+
+	/*---------------------------------------------------- Single-post --------------------------------------------*/
    app.get('/single-post', (req, res, next) => {
 
 		let relatedPosts = [
@@ -228,10 +257,15 @@ module.exports = (app) => {
 		]
 
       res.render('single-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, relatedPosts});
-   });
+	 });
+	 
+	/*-------------------------------------------------- Single-post end ------------------------------------------*/
 
+	/*------------------------------------------------------ Contact ----------------------------------------------*/
    app.get('/contact', (req, res, next) => {
       res.render('contact');
-   });
+	 });
+	 
+	/*---------------------------------------------------- Contact end --------------------------------------------*/
 
 };
