@@ -31,8 +31,8 @@ app.locals.dateAndTime.setLocales('en', {
    'dddd': ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'],
    'ddd': ['søn', 'man', 'tirs', 'ons', 'tors', 'fre', 'lør'],
    'dd': ['sø', 'ma', 'ti', 'on', 'to', 'fr', 'lø'],
-   'MMM': ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec'],
-   'MMMM': ['januar', ' februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december']
+   'MMM': ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dec'],
+   'MMMM': ['Januar', ' Februar', 'Marts', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December']
 });
 
 
