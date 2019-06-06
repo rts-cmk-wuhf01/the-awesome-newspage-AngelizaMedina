@@ -1,3 +1,6 @@
+
+const mysql = require('../config/mysql');
+
 let fourMostPopularNews = [
 	{
 		'number': '1.',
@@ -88,6 +91,19 @@ let latestComments = [
 
 
 module.exports = (app) => {
+	
+	app.get('/database', async (req, res, next) => {
+
+		let db = await mysql.connect();
+		let [products] = await db.execute('SELECT	* FROM products');
+		db.end();
+
+		// res.send(products);
+
+		res.render('database', {
+		'products': products
+		});
+ });
 
 	/*-------------------------------------------------------- Home --------------------------------------------------*/
    app.get('/', (req, res, next) => {

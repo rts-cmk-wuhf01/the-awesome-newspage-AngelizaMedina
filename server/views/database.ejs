@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Test</title>
+</head>
+
+<body>
+
+	<% if(typeof products != 'undefined') { %>
+		
+		<% products.forEach(product => { %>
+		<div>
+			 <h3><%= product.product_name %></h3>
+			 <p><%= product.product_description %></p>
+			 <p>Product Color: <%= product.fk_product_color %></p>
+			 <p>Product Category: <%= product.fk_product_category %></p>
+			 <span><%= product.product_price%> €</span>
+		</div>
+		<% }); %>
+
+ <% } %>
+
+</body>
+
+</html>

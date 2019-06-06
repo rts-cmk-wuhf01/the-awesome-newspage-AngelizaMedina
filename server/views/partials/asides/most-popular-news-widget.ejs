@@ -2,18 +2,19 @@
 	<h3>4 Most Popular News</h3>
 
 	<% if(typeof fourMostPopularNews != 'undefined') { %>
-	<% fourMostPopularNews.forEach(news => { %>
-	<% let newsDate = new Date(news.date); %>
 
-	<!-- Single Popular Blog -->
-	<div class="single-popular-post">
-			<a href="#">
-					<h6><span><%= news.number %></span><%= news.txt %></h6>
-			</a>
-			<p><%= dateAndTime.format(newsDate, 'MMMM DD, YYYY') %></p>
-	</div>
-
-	<% }) %>
+		<% fourMostPopularNews.forEach(news => { %>
+		<% let newsDate = new Date(news.date); %>
+	
+		<!-- Single Popular Blog -->
+		<div class="single-popular-post">
+				<a href="#">
+						<h6><span><%= news.id %></span><%= news.txt %></h6>
+				</a>
+				<p><%= dateAndTime.format(newsDate, 'MMMM DD, YYYY') %></p>
+		</div>
+	
+		<% }) %>
 	<% } %>
 
 </div>
