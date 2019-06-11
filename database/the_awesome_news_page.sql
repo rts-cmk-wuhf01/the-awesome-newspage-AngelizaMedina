@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2019 at 07:51 AM
+-- Generation Time: Jun 11, 2019 at 11:15 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -60,7 +60,8 @@ CREATE TABLE `authors` (
   `author_id` int(11) NOT NULL,
   `author_name` varchar(100) NOT NULL,
   `author_email` varchar(300) NOT NULL,
-  `author_img` varchar(100) NOT NULL
+  `author_img` varchar(100) NOT NULL,
+  `author_description` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -74,6 +75,20 @@ CREATE TABLE `categories` (
   `category` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`category_id`, `category`) VALUES
+(1, 'finance'),
+(2, 'politics'),
+(3, 'health'),
+(4, 'travel'),
+(5, 'breaking news'),
+(6, 'business'),
+(7, 'technology'),
+(8, 'sports');
+
 -- --------------------------------------------------------
 
 --
@@ -85,8 +100,45 @@ CREATE TABLE `comments` (
   `FK_user` int(11) NOT NULL,
   `FK_user_img` int(11) NOT NULL,
   `comment` varchar(1000) NOT NULL,
-  `comment_date_time` datetime NOT NULL
+  `comment_date` date NOT NULL,
+  `comment_time` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `FK_user`, `FK_user_img`, `comment`, `comment_date`, `comment_time`) VALUES
+(1, 1, 1, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00'),
+(2, 2, 2, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00'),
+(3, 3, 3, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `employees`
+--
+
+CREATE TABLE `employees` (
+  `employee_id` int(11) NOT NULL,
+  `employee__name` varchar(100) NOT NULL,
+  `employee_img` varchar(100) NOT NULL,
+  `job` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `employee__name`, `employee_img`, `job`) VALUES
+(1, 'James Williams', 'img/bg-img/t1.jpg', 'Senior Editor'),
+(2, 'Christinne Smith', 'img/bg-img/t2.jpg', 'Senior Editor'),
+(3, 'Alicia Dormund', 'img/bg-img/t3.jpg', 'Senior Editor'),
+(4, 'Steve Duncan', 'img/bg-img/t4.jpg', 'Senior Editor'),
+(5, 'James Williams', 'img/bg-img/t5.jpg', 'Senior Editor'),
+(6, 'Christinne Smith', 'img/bg-img/t6.jpg', 'Senior Editor'),
+(7, 'Alicia Dormund', 'img/bg-img/t7.jpg', 'Senior Editor'),
+(8, 'Steve Duncan', 'img/bg-img/t8.jpg', 'Senior Editor');
 
 -- --------------------------------------------------------
 
@@ -104,6 +156,15 @@ CREATE TABLE `users` (
   `account_creation_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `password`, `user_img`, `birthday`, `account_creation_date`) VALUES
+(1, 'Christian Williams', 'christian.williams@gmail.com', 'password', 'img/bg-img/30.jpg', '1985-06-11', '2019-06-01'),
+(2, 'Sandy Doe', 'sandy.doe@gmail.com', 'password', 'img/bg-img/31.jpg', '1985-06-11', '2019-06-01'),
+(3, 'Christian Williams', 'christian.williams2@gmail.com', 'password', 'img/bg-img/32.jpg', '1985-06-11', '2019-06-01');
+
 -- --------------------------------------------------------
 
 --
@@ -116,6 +177,15 @@ CREATE TABLE `videos` (
   `video_src` varchar(300) NOT NULL,
   `video_img` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `videos`
+--
+
+INSERT INTO `videos` (`video_id`, `video_title`, `video_src`, `video_img`) VALUES
+(1, 'video1', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', 'img/bg-img/video1.jpg'),
+(2, 'video2', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', 'img/bg-img/video2.jpg'),
+(3, 'video3', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', 'img/bg-img/video3.jpg');
 
 --
 -- Indexes for dumped tables
@@ -158,6 +228,12 @@ ALTER TABLE `comments`
   ADD KEY `fk_user_img` (`FK_user_img`);
 
 --
+-- Indexes for table `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`employee_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -195,36 +271,31 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `comments`
---
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`fk_user`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`fk_user_img`) REFERENCES `users` (`user_id`);
+  MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
