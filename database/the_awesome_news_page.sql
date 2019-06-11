@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2019 at 11:15 AM
+-- Generation Time: Jun 11, 2019 at 01:54 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -80,14 +80,14 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `category`) VALUES
-(1, 'finance'),
-(2, 'politics'),
-(3, 'health'),
-(4, 'travel'),
-(5, 'breaking news'),
-(6, 'business'),
-(7, 'technology'),
-(8, 'sports');
+(1, 'Politics'),
+(2, 'Breaking News'),
+(3, 'Business'),
+(4, 'Technology'),
+(5, 'Health'),
+(6, 'Travel'),
+(7, 'Sports'),
+(8, 'Finance');
 
 -- --------------------------------------------------------
 
