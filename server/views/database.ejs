@@ -11,19 +11,12 @@
 
 <body>
 
-	<% if(typeof products != 'undefined') { %>
-		
-		<% products.forEach(product => { %>
-		<div>
-			 <h3><%= product.product_name %></h3>
-			 <p><%= product.product_description %></p>
-			 <p>Product Color: <%= product.fk_product_color %></p>
-			 <p>Product Category: <%= product.fk_product_category %></p>
-			 <span><%= product.product_price%> €</span>
-		</div>
-		<% }); %>
+	<% if (typeof categories != 'undefined') { %>
+		<% categories.forEach(category => { %>
+			<h1><%= category.category %></h1>
+		<% }) %>
+	<% } %>
 
- <% } %>
 
 </body>
 

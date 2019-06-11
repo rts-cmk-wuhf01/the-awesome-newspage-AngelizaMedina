@@ -95,10 +95,15 @@ module.exports = (app) => {
 	app.get('/database', async (req, res, next) => {
 
 		let db = await mysql.connect();
-		let [data] = await db.execute('SELECT	* FROM categories');
-		db.end();
+		let [categories] = await db.execute(`
+		SELECT categories.category_id,
+		categories.category
+		FROM categories
+		`);
 
-		 res.send(data);
+		res.render('database', {'categories': categories});
+
+		db.end();
 
 		// res.render('database', {
 		// 'categories': data
@@ -106,7 +111,7 @@ module.exports = (app) => {
  });
 
 	/*-------------------------------------------------------- Home --------------------------------------------------*/
-  app.get('/', (req, res, next) => {
+  app.get('/', async (req, res, next) => {
 
 		let popularNews = [
 			{
@@ -185,13 +190,22 @@ module.exports = (app) => {
 			},
 		]
 
-      res.render('home', {fourMostPopularNews, singleFeaturedPosts, popularNews, videoPosts, editorsPicks, worldNewsPosts});
-	 });
+		let db = await mysql.connect();
+		let [categories] = await db.execute(`
+		SELECT categories.category_id,
+		categories.category
+		FROM categories
+		`);
+
+      res.render('home', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, popularNews, videoPosts, editorsPicks, worldNewsPosts});
+		
+		db.end();
+	});
 	 
 	/*----------------------------------------------------- Home end -----------------------------------------------*/
 
 	/*-------------------------------------------------- Categories-post -------------------------------------------*/
-  app.get('/categories-post', (req, res, next) => {
+  app.get('/categories-post', async (req, res, next) => {
 
 		let singleFeaturedPosts2 = [
 			{
@@ -218,7 +232,7 @@ module.exports = (app) => {
 	/*------------------------------------------------ Categories-post end ----------------------------------------*/
 
 	/*---------------------------------------------------- Single-post --------------------------------------------*/
-   app.get('/single-post', (req, res, next) => {
+   app.get('/single-post', async (req, res, next) => {
 
 		let relatedPosts = [
 			{
@@ -235,7 +249,7 @@ module.exports = (app) => {
 	/*-------------------------------------------------- Single-post end ------------------------------------------*/
 
 	/*------------------------------------------------------- About ------------------------------------------------*/
-	app.get('/about', (req, res, next) => {
+	app.get('/about', async (req, res, next) => {
 
 		let teamMembers = [
 			{
@@ -297,7 +311,7 @@ module.exports = (app) => {
 	/*----------------------------------------------------- About end ---------------------------------------------*/
 
 	/*------------------------------------------------------ Contact ----------------------------------------------*/
-   app.get('/contact', (req, res, next) => {
+   app.get('/contact', async (req, res, next) => {
       res.render('contact');
 	 });
 	 
