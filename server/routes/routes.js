@@ -95,18 +95,18 @@ module.exports = (app) => {
 	app.get('/database', async (req, res, next) => {
 
 		let db = await mysql.connect();
-		let [products] = await db.execute('SELECT	* FROM products');
+		let [data] = await db.execute('SELECT	* FROM categories');
 		db.end();
 
-		// res.send(products);
+		 res.send(data);
 
-		res.render('database', {
-		'products': products
-		});
+		// res.render('database', {
+		// 'categories': data
+		// });
  });
 
 	/*-------------------------------------------------------- Home --------------------------------------------------*/
-   app.get('/', (req, res, next) => {
+  app.get('/', (req, res, next) => {
 
 		let popularNews = [
 			{
@@ -191,29 +191,39 @@ module.exports = (app) => {
 	/*----------------------------------------------------- Home end -----------------------------------------------*/
 
 	/*-------------------------------------------------- Categories-post -------------------------------------------*/
-   app.get('/categories-post', (req, res, next) => {
+  // app.get('/categories-post', (req, res, next) => {
 
-		let singleFeaturedPosts2 = [
-			{
-				'title': 'Financial news: A new company is born today at the stock market',
-				'img': 'img/bg-img/25.jpg'
-			},
-			{
-				'title': 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat',
-				'img': 'img/bg-img/26.jpg'
-			},
-			{
-				'title': 'Most investors think 2018 is the peak year for stocks',
-				'img': 'img/bg-img/27.jpg'
-			},
-			{
-				'title': 'Facebook is offering facial recognition again in Europe',
-				'img': 'img/bg-img/28.jpg'
-			}			
-		];
+	// 	let singleFeaturedPosts2 = [
+	// 		{
+	// 			'title': 'Financial news: A new company is born today at the stock market',
+	// 			'img': 'img/bg-img/25.jpg'
+	// 		},
+	// 		{
+	// 			'title': 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat',
+	// 			'img': 'img/bg-img/26.jpg'
+	// 		},
+	// 		{
+	// 			'title': 'Most investors think 2018 is the peak year for stocks',
+	// 			'img': 'img/bg-img/27.jpg'
+	// 		},
+	// 		{
+	// 			'title': 'Facebook is offering facial recognition again in Europe',
+	// 			'img': 'img/bg-img/28.jpg'
+	// 		}			
+	// 	];
 
-      res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
-	 });
+  //     res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
+	//  });
+
+	app.get('/categories-post/:category_id', async (req, res, next) => {
+
+		let db = await mysql.connect();
+		let [categories] = await db.execute('SELECT	* FROM categories');
+		db.end();
+
+		res.send(req.params.category_id);
+ 
+	});
 	 
 	/*------------------------------------------------ Categories-post end ----------------------------------------*/
 
