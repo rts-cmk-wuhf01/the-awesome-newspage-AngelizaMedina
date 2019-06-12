@@ -2,21 +2,21 @@
 	<h3>Latest Comments</h3>
 
 	<% if(typeof latestComments != 'undefined') { %>
-	<% latestComments.forEach(comment => { %>
-	<% let commentDate = new Date(comment.date); %>
+		<% latestComments.forEach(comment => { %>
+		<% let commentDate = new Date(comment.date); %>
 
-	<!-- Single Comments -->
-	<div class="single-comments d-flex">
-			<div class="comments-thumbnail mr-15">
-					<img src="<%= comment.img %>" alt="">
-			</div>
-			<div class="comments-text">
-					<a href="#"><%= comment.name %> <span>on</span> Facebook is offering facial recognition...</a>
-					<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
-			</div>
-	</div>
+		<!-- Single Comments -->
+		<div class="single-comments d-flex">
+				<div class="comments-thumbnail mr-15">
+						<img src="<%= comment.img %>" alt="">
+				</div>
+				<div class="comments-text">
+						<a href="#"><%= comment.name %> <span>on</span> Facebook is offering facial recognition...</a>
+						<p><%= dateAndTime.format(commentDate, 'hh:mm A, MMMM DD, YYYY') %></p>
+				</div>
+		</div>
 
-	<% }) %>
+		<% }) %>
 	<% } %>
 
 </div>
