@@ -91,7 +91,9 @@ let latestComments = [
 
 
 module.exports = (app) => {
-	
+
+/*======================================================= TESTING ROUTES ==========================================*/
+
 	app.get('/database', async (req, res, next) => {
 
 		let db = await mysql.connect();
@@ -105,10 +107,24 @@ module.exports = (app) => {
 
 		db.end();
 
-		// res.render('database', {
-		// 'categories': data
-		// });
- });
+	});
+	
+	app.get('/database/:category_id', async (req, res, next) => {
+
+		let db = await mysql.connect();
+		let [categories] = await db.execute(`
+		SELECT categories.category_id,
+		categories.category
+		FROM categories
+		`);
+
+		res.render('database', {'categories': categories});
+
+		db.end();
+
+	});
+
+	/*================================================= TESTING ROUTES END ===========================================*/
 
 	/*-------------------------------------------------------- Home --------------------------------------------------*/
   app.get('/', async (req, res, next) => {
@@ -197,9 +213,10 @@ module.exports = (app) => {
 		FROM categories
 		`);
 
-      res.render('home', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, popularNews, videoPosts, editorsPicks, worldNewsPosts});
+    res.render('home', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, popularNews, videoPosts, editorsPicks, worldNewsPosts});
 		
 		db.end();
+
 	});
 	 
 	/*----------------------------------------------------- Home end -----------------------------------------------*/
@@ -226,8 +243,51 @@ module.exports = (app) => {
 			}			
 		];
 
-      res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
-	 });
+		let db = await mysql.connect();
+		let [categories] = await db.execute(`
+		SELECT categories.category_id,
+		categories.category
+		FROM categories
+		`);
+
+		res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2, 'categories': categories});
+		
+		db.end();
+	});
+
+	app.get('/categories-post/:category_id', async (req, res, next) => {
+
+		let db = await mysql.connect();
+		let [categories] = await db.execute(`
+		SELECT categories.category_id,
+		categories.category
+		FROM categories
+		`);
+
+		let singleFeaturedPosts2 = [
+			{
+				'title': 'Financial news: A new company is born today at the stock market',
+				'img': 'img/bg-img/25.jpg'
+			},
+			{
+				'title': 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat',
+				'img': 'img/bg-img/26.jpg'
+			},
+			{
+				'title': 'Most investors think 2018 is the peak year for stocks',
+				'img': 'img/bg-img/27.jpg'
+			},
+			{
+				'title': 'Facebook is offering facial recognition again in Europe',
+				'img': 'img/bg-img/28.jpg'
+			}			
+		];
+
+		res.render('categories-post', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
+
+		db.end();
+
+	});
 	 
 	/*------------------------------------------------ Categories-post end ----------------------------------------*/
 
@@ -243,8 +303,17 @@ module.exports = (app) => {
 			}
 		]
 
-      res.render('single-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, relatedPosts});
-	 });
+		let db = await mysql.connect();
+		let [categories] = await db.execute(`
+		SELECT categories.category_id,
+		categories.category
+		FROM categories
+		`);
+
+		res.render('single-post', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, latestComments, relatedPosts});
+		
+		db.end();
+	});
 	 
 	/*-------------------------------------------------- Single-post end ------------------------------------------*/
 
@@ -305,14 +374,31 @@ module.exports = (app) => {
 			}
 		];
 
-			res.render('about', {teamMembers, coolFacts});
+		let db = await mysql.connect();
+		let [categories] = await db.execute(`
+		SELECT categories.category_id,
+		categories.category
+		FROM categories
+		`);
+
+		res.render('about', {'categories': categories, teamMembers, coolFacts});
+
+		db.end();
 	});
 	
 	/*----------------------------------------------------- About end ---------------------------------------------*/
 
 	/*------------------------------------------------------ Contact ----------------------------------------------*/
    app.get('/contact', async (req, res, next) => {
-      res.render('contact');
+
+			let db = await mysql.connect();
+			let [categories] = await db.execute(`
+			SELECT categories.category_id,
+			categories.category
+			FROM categories
+			`);
+
+      res.render('contact', {'categories': categories});
 	 });
 	 
 	/*---------------------------------------------------- Contact end --------------------------------------------*/
