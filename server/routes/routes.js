@@ -258,10 +258,17 @@ module.exports = (app) => {
 	app.get('/categories-post/:category_id', async (req, res, next) => {
 
 		let db = await mysql.connect();
+
 		let [categories] = await db.execute(`
 		SELECT categories.category_id,
 		categories.category
 		FROM categories
+		`);
+
+		let [articles] = await db.execute(`
+			SELECT * 
+			FROM articles
+			WHERE fk_category_id = ?
 		`);
 
 		let singleFeaturedPosts2 = [
@@ -283,7 +290,7 @@ module.exports = (app) => {
 			}			
 		];
 
-		res.render('categories-post', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
+		res.render('categories-post', {'categories': categories, 'articles': articles, fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
 
 		db.end();
 
