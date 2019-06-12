@@ -139,18 +139,6 @@ module.exports = (app) => {
 			}
 		];
 
-		let videoPosts = [
-			{
-				'img': 'img/bg-img/video1.jpg',
-			},
-			{
-				'img': 'img/bg-img/video2.jpg',
-			},
-			{
-				'img': 'img/bg-img/video3.jpg',
-			}
-		];
-
 		let editorsPicks = [
 			{
 				'img': 'img/bg-img/1.jpg',
@@ -202,13 +190,22 @@ module.exports = (app) => {
 		]
 
 		let db = await mysql.connect();
+		
 		let [categories] = await db.execute(`
-		SELECT categories.category_id,
-		categories.category
+		SELECT category_id,
+		category
 		FROM categories
 		`);
 
-    res.render('home', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, popularNews, videoPosts, editorsPicks, worldNewsPosts});
+		let [videos] = await db.execute(`
+		SELECT video_id,
+		video_title,
+		video_src,
+		video_img
+		FROM videos
+		`);
+
+    res.render('home', {'categories': categories, 'videos': videos, fourMostPopularNews, singleFeaturedPosts, popularNews, editorsPicks, worldNewsPosts});
 		
 		db.end();
 
