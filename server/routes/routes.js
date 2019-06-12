@@ -97,13 +97,8 @@ module.exports = (app) => {
 	app.get('/database', async (req, res, next) => {
 
 		let db = await mysql.connect();
-		let [categories] = await db.execute(`
-		SELECT categories.category_id,
-		categories.category
-		FROM categories
-		`);
 
-		res.render('database', {'categories': categories});
+		res.render('database');
 
 		db.end();
 
@@ -112,13 +107,13 @@ module.exports = (app) => {
 	app.get('/database/:category_id', async (req, res, next) => {
 
 		let db = await mysql.connect();
-		let [categories] = await db.execute(`
-		SELECT categories.category_id,
-		categories.category
-		FROM categories
-		`);
+		let [articles] = await db.execute(`
+			SELECT * 
+			FROM articles
+			WHERE FK_article_category = ?
+		`, [req.params.category_id]);
 
-		res.render('database', {'categories': categories});
+		res.render('database', {'articles': articles});
 
 		db.end();
 
@@ -268,8 +263,8 @@ module.exports = (app) => {
 		let [articles] = await db.execute(`
 			SELECT * 
 			FROM articles
-			WHERE fk_category_id = ?
-		`);
+			WHERE FK_article_category = ?
+		`, [req.params.category_id]);
 
 		let singleFeaturedPosts2 = [
 			{

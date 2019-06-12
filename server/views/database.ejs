@@ -11,9 +11,9 @@
 
 <body>
 
-	<% if (typeof categories != 'undefined') { %>
-		<% categories.forEach(category => { %>
-			<h1><%= category.category %></h1>
+	<% if (typeof articles != 'undefined') { %>
+		<% articles.forEach(article => { %>
+			<h1><%= article.article_title %></h1>
 		<% }) %>
 	<% } %>
 
