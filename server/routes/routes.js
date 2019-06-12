@@ -24,66 +24,64 @@ let fourMostPopularNews = [
 	}
 ];
 
-
 let singleFeaturedPosts = [
 	{
 		'category': 'finance',
 		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
-		'img': 'img/bg-img/19.jpg',
+		'img': '/img/bg-img/19.jpg',
 		'date': '04-14 07:00'
 	},
 	{
 		'category': 'politics',
 		'txt': 'Sed a elit euismod augue semper congue sit amet ac sapien.',
-		'img': 'img/bg-img/20.jpg',
+		'img': '/img/bg-img/20.jpg',
 		'date': '04-14 07:00'
 	},
 	{
 		'category': 'health',
 		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
-		'img': 'img/bg-img/21.jpg',
+		'img': '/img/bg-img/21.jpg',
 		'date': '04-14 07:00'
 	},
 	{
 		'category': 'finance',
 		'txt': 'Augue semper congue sit amet ac sapien. Fusce consequat.',
-		'img': 'img/bg-img/22.jpg',
+		'img': '/img/bg-img/22.jpg',
 		'date': '04-14 07:00'
 	},
 	{
 		'category': 'travel',
 		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
-		'img': 'img/bg-img/23.jpg',
+		'img': '/img/bg-img/23.jpg',
 		'date': '04-14 07:00'
 	},
 	{
 		'category': 'politics',
 		'txt': 'Augue semper congue sit amet ac sapien. Fusce consequat.',
-		'img': 'img/bg-img/24.jpg',
+		'img': '/img/bg-img/24.jpg',
 		'date': '04-14 07:00'
 	}
 ];
 
-
 let latestComments = [
 	{
 		'name': 'Jamie Smith',
-		'img': 'img/bg-img/29.jpg',
+		'img': '/img/bg-img/29.jpg',
 		'date': '2018-04-14 06:34'
 	},
 	{
 		'name': 'Jamie Smith',
-		'img': 'img/bg-img/30.jpg',
+		'img': '/img/bg-img/30.jpg',
 		'date': '2018-04-14 06:34'
 	},
 	{
 		'name': 'Jamie Smith',
-		'img': 'img/bg-img/31.jpg',
+		'img': '/img/bg-img/31.jpg',
 		'date': '2018-04-14 06:34'
 	},
 	{
 		'name': 'Jamie Smith',
-		'img': 'img/bg-img/32.jpg',
+		'img': '/img/bg-img/32.jpg',
 		'date': '2018-04-14 06:34'
 	}
  ];
@@ -108,8 +106,9 @@ module.exports = (app) => {
 
 		let db = await mysql.connect();
 		let [articles] = await db.execute(`
-			SELECT * 
+			SELECT categories.category
 			FROM articles
+			INNER JOIN categories ON FK_article_category = categories.category_id
 			WHERE FK_article_category = ?
 		`, [req.params.category_id]);
 
@@ -126,83 +125,83 @@ module.exports = (app) => {
 
 		let popularNews = [
 			{
-				'img': 'img/bg-img/12.jpg'
+				'img': '/img/bg-img/12.jpg'
 			},
 			{
-				'img': 'img/bg-img/13.jpg'
+				'img': '/img/bg-img/13.jpg'
 			},
 			{
-				'img': 'img/bg-img/14.jpg'
+				'img': '/img/bg-img/14.jpg'
 			},
 			{
-				'img': 'img/bg-img/15.jpg'
+				'img': '/img/bg-img/15.jpg'
 			}
 		];
 
 		let editorsPicks = [
 			{
-				'img': 'img/bg-img/1.jpg',
+				'img': '/img/bg-img/1.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/2.jpg',
+				'img': '/img/bg-img/2.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/3.jpg',
+				'img': '/img/bg-img/3.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/4.jpg',
+				'img': '/img/bg-img/4.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/5.jpg',
+				'img': '/img/bg-img/5.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/6.jpg',
+				'img': '/img/bg-img/6.jpg',
 				'date': '2018-02-11'
 			},
 		];
 
 		let worldNewsPosts = [
 			{
-				'img': 'img/bg-img/7.jpg',
+				'img': '/img/bg-img/7.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/8.jpg',
+				'img': '/img/bg-img/8.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/9.jpg',
+				'img': '/img/bg-img/9.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/10.jpg',
+				'img': '/img/bg-img/10.jpg',
 				'date': '2018-02-11'
 			},
 			{
-				'img': 'img/bg-img/11.jpg',
+				'img': '/img/bg-img/11.jpg',
 				'date': '2018-02-11'
 			},
 		]
 
 		let db = await mysql.connect();
-		
+
 		let [categories] = await db.execute(`
-		SELECT category_id,
-		category
-		FROM categories
+			SELECT category_id,
+			category
+			FROM categories
 		`);
 
 		let [videos] = await db.execute(`
-		SELECT video_id,
-		video_title,
-		video_src,
-		video_img
-		FROM videos
+			SELECT video_id,
+			video_title,
+			video_src,
+			video_img
+			FROM videos
 		`);
 
     res.render('home', {'categories': categories, 'videos': videos, fourMostPopularNews, singleFeaturedPosts, popularNews, editorsPicks, worldNewsPosts});
@@ -219,27 +218,28 @@ module.exports = (app) => {
 		let singleFeaturedPosts2 = [
 			{
 				'title': 'Financial news: A new company is born today at the stock market',
-				'img': 'img/bg-img/25.jpg'
+				'img': '/img/bg-img/25.jpg'
 			},
 			{
 				'title': 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat',
-				'img': 'img/bg-img/26.jpg'
+				'img': '/img/bg-img/26.jpg'
 			},
 			{
 				'title': 'Most investors think 2018 is the peak year for stocks',
-				'img': 'img/bg-img/27.jpg'
+				'img': '/img/bg-img/27.jpg'
 			},
 			{
 				'title': 'Facebook is offering facial recognition again in Europe',
-				'img': 'img/bg-img/28.jpg'
+				'img': '/img/bg-img/28.jpg'
 			}			
 		];
 
 		let db = await mysql.connect();
+
 		let [categories] = await db.execute(`
-		SELECT categories.category_id,
-		categories.category
-		FROM categories
+			SELECT category_id,
+			category
+			FROM categories
 		`);
 
 		res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2, 'categories': categories});
@@ -249,12 +249,31 @@ module.exports = (app) => {
 
 	app.get('/categories-post/:category_id', async (req, res, next) => {
 
+		let singleFeaturedPosts2 = [
+			{
+				'title': 'Financial news: A new company is born today at the stock market',
+				'img': '/img/bg-img/25.jpg'
+			},
+			{
+				'title': 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat',
+				'img': '/img/bg-img/26.jpg'
+			},
+			{
+				'title': 'Most investors think 2018 is the peak year for stocks',
+				'img': '/img/bg-img/27.jpg'
+			},
+			{
+				'title': 'Facebook is offering facial recognition again in Europe',
+				'img': '/img/bg-img/28.jpg'
+			}			
+		];
+
 		let db = await mysql.connect();
 
 		let [categories] = await db.execute(`
-		SELECT categories.category_id,
-		categories.category
-		FROM categories
+			SELECT category_id,
+			category
+			FROM categories
 		`);
 
 		let [articles] = await db.execute(`
@@ -262,25 +281,6 @@ module.exports = (app) => {
 			FROM articles
 			WHERE FK_article_category = ?
 		`, [req.params.category_id]);
-
-		let singleFeaturedPosts2 = [
-			{
-				'title': 'Financial news: A new company is born today at the stock market',
-				'img': 'img/bg-img/25.jpg'
-			},
-			{
-				'title': 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat',
-				'img': 'img/bg-img/26.jpg'
-			},
-			{
-				'title': 'Most investors think 2018 is the peak year for stocks',
-				'img': 'img/bg-img/27.jpg'
-			},
-			{
-				'title': 'Facebook is offering facial recognition again in Europe',
-				'img': 'img/bg-img/28.jpg'
-			}			
-		];
 
 		res.render('categories-post', {'categories': categories, 'articles': articles, fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
 
@@ -295,18 +295,18 @@ module.exports = (app) => {
 
 		let relatedPosts = [
 			{
-				'img': 'img/bg-img/12.jpg'
+				'img': '/img/bg-img/12.jpg'
 			},
 			{
-				'img': 'img/bg-img/13.jpg'
+				'img': '/img/bg-img/13.jpg'
 			}
 		]
 
 		let db = await mysql.connect();
 		let [categories] = await db.execute(`
-		SELECT categories.category_id,
-		categories.category
-		FROM categories
+			SELECT category_id,
+			category
+			FROM categories
 		`);
 
 		res.render('single-post', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, latestComments, relatedPosts});
@@ -322,35 +322,35 @@ module.exports = (app) => {
 		let teamMembers = [
 			{
 				'name': 'James Williams',
-				'img': 'img/bg-img/t1.jpg'
+				'img': '/img/bg-img/t1.jpg'
 			},
 			{
 				'name': 'Christinne Smith',
-				'img': 'img/bg-img/t2.jpg'
+				'img': '/img/bg-img/t2.jpg'
 			},
 			{
 				'name': 'Alicia Dormund',
-				'img': 'img/bg-img/t3.jpg'
+				'img': '/img/bg-img/t3.jpg'
 			},
 			{
 				'name': 'Steve Duncan',
-				'img': 'img/bg-img/t4.jpg'
+				'img': '/img/bg-img/t4.jpg'
 			},
 			{
 				'name': 'James Williams',
-				'img': 'img/bg-img/t5.jpg'
+				'img': '/img/bg-img/t5.jpg'
 			},
 			{
 				'name': 'Christinne Smith',
-				'img': 'img/bg-img/t6.jpg'
+				'img': '/img/bg-img/t6.jpg'
 			},
 			{
 				'name': 'Alicia Dormund',
-				'img': 'img/bg-img/t7.jpg'
+				'img': '/img/bg-img/t7.jpg'
 			},
 			{
 				'name': 'Steve Duncan',
-				'img': 'img/bg-img/t8.jpg'
+				'img': '/img/bg-img/t8.jpg'
 			},
 		];
 
@@ -374,10 +374,11 @@ module.exports = (app) => {
 		];
 
 		let db = await mysql.connect();
+
 		let [categories] = await db.execute(`
-		SELECT categories.category_id,
-		categories.category
-		FROM categories
+			SELECT category_id,
+			category
+			FROM categories
 		`);
 
 		res.render('about', {'categories': categories, teamMembers, coolFacts});
@@ -391,10 +392,11 @@ module.exports = (app) => {
    app.get('/contact', async (req, res, next) => {
 
 			let db = await mysql.connect();
+
 			let [categories] = await db.execute(`
-			SELECT categories.category_id,
-			categories.category
-			FROM categories
+				SELECT category_id,
+				category
+				FROM categories
 			`);
 
       res.render('contact', {'categories': categories});
