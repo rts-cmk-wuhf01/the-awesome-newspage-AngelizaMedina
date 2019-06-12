@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 12. 06 2019 kl. 09:51:58
+-- Genereringstid: 12. 06 2019 kl. 14:24:25
 -- Serverversion: 10.1.30-MariaDB
 -- PHP-version: 7.2.1
 
@@ -192,9 +192,9 @@ CREATE TABLE `videos` (
 --
 
 INSERT INTO `videos` (`video_id`, `video_title`, `video_src`, `video_img`) VALUES
-(1, 'video1', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', 'img/bg-img/video1.jpg'),
-(2, 'video2', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', 'img/bg-img/video2.jpg'),
-(3, 'video3', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', 'img/bg-img/video3.jpg');
+(1, 'video1', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', '/img/bg-img/video1.jpg'),
+(2, 'video2', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', '/img/bg-img/video2.jpg'),
+(3, 'video3', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', '/img/bg-img/video3.jpg');
 
 --
 -- Begrænsninger for dumpede tabeller
