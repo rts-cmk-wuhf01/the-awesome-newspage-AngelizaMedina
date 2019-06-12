@@ -2,10 +2,10 @@
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 11, 2019 at 01:54 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Vært: 127.0.0.1
+-- Genereringstid: 12. 06 2019 kl. 09:51:58
+-- Serverversion: 10.1.30-MariaDB
+-- PHP-version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `articles`
+-- Struktur-dump for tabellen `articles`
 --
 
 CREATE TABLE `articles` (
@@ -39,10 +39,19 @@ CREATE TABLE `articles` (
   `FK_author_img` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Data dump for tabellen `articles`
+--
+
+INSERT INTO `articles` (`article_id`, `article_title`, `article`, `FK_article_img`, `FK_article_category`, `article_date_time`, `FK_author_name`, `FK_author_img`) VALUES
+(1, 'Article title about something political', 'Article about something political', 0, 1, '2019-06-12 09:35', 0, 0),
+(2, 'Article title about something political 2', 'Article about something political 2', 0, 1, '2018-06-12 09:49', 0, 0),
+(3, 'Article title about something NOT political', 'Article about something NOT political', 0, 2, '2017-06-12 09:50', 0, 0);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article_imgs`
+-- Struktur-dump for tabellen `article_imgs`
 --
 
 CREATE TABLE `article_imgs` (
@@ -53,7 +62,7 @@ CREATE TABLE `article_imgs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `authors`
+-- Struktur-dump for tabellen `authors`
 --
 
 CREATE TABLE `authors` (
@@ -67,7 +76,7 @@ CREATE TABLE `authors` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Struktur-dump for tabellen `categories`
 --
 
 CREATE TABLE `categories` (
@@ -76,7 +85,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- Data dump for tabellen `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `category`) VALUES
@@ -92,7 +101,7 @@ INSERT INTO `categories` (`category_id`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Struktur-dump for tabellen `comments`
 --
 
 CREATE TABLE `comments` (
@@ -105,7 +114,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comments`
+-- Data dump for tabellen `comments`
 --
 
 INSERT INTO `comments` (`comment_id`, `FK_user`, `FK_user_img`, `comment`, `comment_date`, `comment_time`) VALUES
@@ -116,7 +125,7 @@ INSERT INTO `comments` (`comment_id`, `FK_user`, `FK_user_img`, `comment`, `comm
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employees`
+-- Struktur-dump for tabellen `employees`
 --
 
 CREATE TABLE `employees` (
@@ -127,7 +136,7 @@ CREATE TABLE `employees` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `employees`
+-- Data dump for tabellen `employees`
 --
 
 INSERT INTO `employees` (`employee_id`, `employee__name`, `employee_img`, `job`) VALUES
@@ -143,7 +152,7 @@ INSERT INTO `employees` (`employee_id`, `employee__name`, `employee_img`, `job`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur-dump for tabellen `users`
 --
 
 CREATE TABLE `users` (
@@ -157,7 +166,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Data dump for tabellen `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `password`, `user_img`, `birthday`, `account_creation_date`) VALUES
@@ -168,7 +177,7 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `password`, `user_img
 -- --------------------------------------------------------
 
 --
--- Table structure for table `videos`
+-- Struktur-dump for tabellen `videos`
 --
 
 CREATE TABLE `videos` (
@@ -179,7 +188,7 @@ CREATE TABLE `videos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `videos`
+-- Data dump for tabellen `videos`
 --
 
 INSERT INTO `videos` (`video_id`, `video_title`, `video_src`, `video_img`) VALUES
@@ -188,11 +197,11 @@ INSERT INTO `videos` (`video_id`, `video_title`, `video_src`, `video_img`) VALUE
 (3, 'video3', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', 'img/bg-img/video3.jpg');
 
 --
--- Indexes for dumped tables
+-- Begrænsninger for dumpede tabeller
 --
 
 --
--- Indexes for table `articles`
+-- Indeks for tabel `articles`
 --
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`article_id`),
@@ -202,25 +211,25 @@ ALTER TABLE `articles`
   ADD KEY `FK_article_category` (`FK_article_category`);
 
 --
--- Indexes for table `article_imgs`
+-- Indeks for tabel `article_imgs`
 --
 ALTER TABLE `article_imgs`
   ADD PRIMARY KEY (`article_img_id`);
 
 --
--- Indexes for table `authors`
+-- Indeks for tabel `authors`
 --
 ALTER TABLE `authors`
   ADD PRIMARY KEY (`author_id`);
 
 --
--- Indexes for table `categories`
+-- Indeks for tabel `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `comments`
+-- Indeks for tabel `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`),
@@ -228,71 +237,71 @@ ALTER TABLE `comments`
   ADD KEY `fk_user_img` (`FK_user_img`);
 
 --
--- Indexes for table `employees`
+-- Indeks for tabel `employees`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`employee_id`);
 
 --
--- Indexes for table `users`
+-- Indeks for tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `videos`
+-- Indeks for tabel `videos`
 --
 ALTER TABLE `videos`
   ADD PRIMARY KEY (`video_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Brug ikke AUTO_INCREMENT for slettede tabeller
 --
 
 --
--- AUTO_INCREMENT for table `articles`
+-- Tilføj AUTO_INCREMENT i tabel `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `article_imgs`
+-- Tilføj AUTO_INCREMENT i tabel `article_imgs`
 --
 ALTER TABLE `article_imgs`
   MODIFY `article_img_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `authors`
+-- Tilføj AUTO_INCREMENT i tabel `authors`
 --
 ALTER TABLE `authors`
   MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- Tilføj AUTO_INCREMENT i tabel `categories`
 --
 ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- Tilføj AUTO_INCREMENT i tabel `comments`
 --
 ALTER TABLE `comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `employees`
+-- Tilføj AUTO_INCREMENT i tabel `employees`
 --
 ALTER TABLE `employees`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `users`
+-- Tilføj AUTO_INCREMENT i tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `videos`
+-- Tilføj AUTO_INCREMENT i tabel `videos`
 --
 ALTER TABLE `videos`
   MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
