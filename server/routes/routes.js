@@ -96,12 +96,25 @@ module.exports = (app) => {
 
 		let db = await mysql.connect();
 
-		let [employees] = await db.execute(`
-			SELECT *
-			FROM employees
+		let [articles] = await db.execute(`
+			SELECT 
+			article_title,
+			article,
+			article_imgs.article_img,
+			categories.category,
+			article_date_time,
+			authors.author_name,
+			authors.author_img
+
+			FROM articles
+
+			INNER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+			INNER JOIN categories ON FK_article_category = categories.category_id
+			INNER JOIN authors ON FK_author_name = authors.author_id
+
 		`);
 
-		res.render('database', {'employees': employees});
+		res.render('database', {'articles': articles});
 
 		db.end();
 
@@ -221,34 +234,33 @@ module.exports = (app) => {
 	/*-------------------------------------------------- Categories-post -------------------------------------------*/
   app.get('/categories-post', async (req, res, next) => {
 
-		let singleFeaturedPosts2 = [
-			{
-				'title': 'Financial news: A new company is born today at the stock market',
-				'img': '/img/bg-img/25.jpg'
-			},
-			{
-				'title': 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat',
-				'img': '/img/bg-img/26.jpg'
-			},
-			{
-				'title': 'Most investors think 2018 is the peak year for stocks',
-				'img': '/img/bg-img/27.jpg'
-			},
-			{
-				'title': 'Facebook is offering facial recognition again in Europe',
-				'img': '/img/bg-img/28.jpg'
-			}			
-		];
-
 		let db = await mysql.connect();
 
 		let [categories] = await db.execute(`
-			SELECT category_id,
+			SELECT 
 			category
+
 			FROM categories
 		`);
 
-		res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2, 'categories': categories});
+		let [articles] = await db.execute(`
+			SELECT 
+			article_title,
+			article_excerpt,
+			article_imgs.article_img,
+			categories.category,
+			article_date_time,
+			authors.author_name,
+			authors.author_img
+
+			FROM articles
+
+			INNER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+			INNER JOIN categories ON FK_article_category = categories.category_id
+			INNER JOIN authors ON FK_author_name = authors.author_id
+		`);
+
+		res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, 'categories': categories, 'articles': articles});
 		
 		db.end();
 	});
@@ -283,8 +295,21 @@ module.exports = (app) => {
 		`);
 
 		let [articles] = await db.execute(`
-			SELECT * 
+			SELECT
+			article_title,
+			article_excerpt,
+			article_imgs.article_img,
+			categories.category,
+			article_date_time,
+			authors.author_name,
+			authors.author_img
+
 			FROM articles
+
+			INNER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+			INNER JOIN categories ON FK_article_category = categories.category_id
+			INNER JOIN authors ON FK_author_name = authors.author_id
+
 			WHERE FK_article_category = ?
 		`, [req.params.category_id]);
 
