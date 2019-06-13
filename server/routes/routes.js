@@ -96,7 +96,12 @@ module.exports = (app) => {
 
 		let db = await mysql.connect();
 
-		res.render('database');
+		let [employees] = await db.execute(`
+			SELECT *
+			FROM employees
+		`);
+
+		res.render('database', {'employees': employees});
 
 		db.end();
 
@@ -105,6 +110,7 @@ module.exports = (app) => {
 	app.get('/database/:category_id', async (req, res, next) => {
 
 		let db = await mysql.connect();
+
 		let [articles] = await db.execute(`
 			SELECT categories.category
 			FROM articles
@@ -376,12 +382,21 @@ module.exports = (app) => {
 		let db = await mysql.connect();
 
 		let [categories] = await db.execute(`
-			SELECT category_id,
+			SELECT 
+			category_id,
 			category
 			FROM categories
 		`);
 
-		res.render('about', {'categories': categories, teamMembers, coolFacts});
+		let [employees] = await db.execute(`
+			SELECT
+			employee_name,
+			employee_img,
+			job
+			FROM employees
+		`);
+
+		res.render('about', {'categories': categories, 'employees': employees, teamMembers, coolFacts});
 
 		db.end();
 	});
