@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2019 at 10:19 AM
+-- Generation Time: Jun 13, 2019 at 01:46 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `articles` (
   `article_id` int(11) NOT NULL,
   `article_title` varchar(300) NOT NULL,
-  `article` varchar(5000) NOT NULL,
+  `article_excerpt` varchar(5000) NOT NULL,
   `FK_article_img` int(11) NOT NULL,
   `FK_article_category` int(11) NOT NULL,
   `article_date_time` datetime NOT NULL,
@@ -43,11 +43,11 @@ CREATE TABLE `articles` (
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`article_id`, `article_title`, `article`, `FK_article_img`, `FK_article_category`, `article_date_time`, `FK_author_name`, `FK_author_img`) VALUES
-(1, 'Financial news: A new company is born today at the stock market', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 25, 8, '2019-06-12 09:35:00', 1, 1),
-(2, 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 26, 1, '2018-06-12 09:49:00', 1, 1),
-(3, 'Most investors think 2018 is the peak year for stocks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 27, 3, '2017-06-12 09:50:00', 1, 1),
-(4, 'Facebook is offering facial recognition again in Europe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.\r\n\r\n', 28, 4, '2016-06-12 10:18:00', 1, 1);
+INSERT INTO `articles` (`article_id`, `article_title`, `article_excerpt`, `FK_article_img`, `FK_article_category`, `article_date_time`, `FK_author_name`, `FK_author_img`) VALUES
+(1, 'Financial news: A new company is born today at the stock market', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 25, 8, '2019-06-13 11:30:00', 1, 1),
+(2, 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 26, 1, '2019-06-13 11:30:00', 1, 1),
+(3, 'Most investors think 2018 is the peak year for stocks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 27, 3, '2019-06-13 11:30:00', 1, 1),
+(4, 'Facebook is offering facial recognition again in Europe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.\r\n\r\n', 28, 4, '2019-06-13 11:30:00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -155,17 +155,18 @@ CREATE TABLE `comments` (
   `FK_user_img` int(11) NOT NULL,
   `comment` varchar(1000) NOT NULL,
   `comment_date` date NOT NULL,
-  `comment_time` time NOT NULL
+  `comment_time` time NOT NULL,
+  `FK_article_title` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `comments`
 --
 
-INSERT INTO `comments` (`comment_id`, `FK_user`, `FK_user_img`, `comment`, `comment_date`, `comment_time`) VALUES
-(1, 1, 1, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00'),
-(2, 2, 2, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00'),
-(3, 3, 3, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00');
+INSERT INTO `comments` (`comment_id`, `FK_user`, `FK_user_img`, `comment`, `comment_date`, `comment_time`, `FK_article_title`) VALUES
+(1, 1, 1, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00', 0),
+(2, 2, 2, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00', 0),
+(3, 3, 3, 'Donec turpis erat, scelerisque id euismod sit amet, fermentum vel dolor. Nulla facilisi. Sed pellen tesque lectus et accu msan aliquam. Fusce lobortis cursus quam, id mattis sapien.', '2018-04-15', '00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -175,7 +176,7 @@ INSERT INTO `comments` (`comment_id`, `FK_user`, `FK_user_img`, `comment`, `comm
 
 CREATE TABLE `employees` (
   `employee_id` int(11) NOT NULL,
-  `employee__name` varchar(100) NOT NULL,
+  `employee_name` varchar(100) NOT NULL,
   `employee_img` varchar(100) NOT NULL,
   `job` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -184,15 +185,15 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`employee_id`, `employee__name`, `employee_img`, `job`) VALUES
-(1, 'James Williams', '/img/bg-img/t1.jpg', 'Senior Editor'),
-(2, 'Christinne Smith', '/img/bg-img/t2.jpg', 'Senior Editor'),
-(3, 'Alicia Dormund', '/img/bg-img/t3.jpg', 'Senior Editor'),
+INSERT INTO `employees` (`employee_id`, `employee_name`, `employee_img`, `job`) VALUES
+(1, 'William James', '/img/bg-img/t1.jpg', 'Senior Editor'),
+(2, 'Alice Johnson', '/img/bg-img/t2.jpg', 'Senior Editor'),
+(3, 'Kimberly Dormund', '/img/bg-img/t3.jpg', 'Senior Editor'),
 (4, 'Steve Duncan', '/img/bg-img/t4.jpg', 'Senior Editor'),
-(5, 'James Williams', '/img/bg-img/t5.jpg', 'Senior Editor'),
+(5, 'Jamie Smith', '/img/bg-img/t5.jpg', 'Senior Editor'),
 (6, 'Christinne Smith', '/img/bg-img/t6.jpg', 'Senior Editor'),
-(7, 'Alicia Dormund', '/img/bg-img/t7.jpg', 'Senior Editor'),
-(8, 'Steve Duncan', '/img/bg-img/t8.jpg', 'Senior Editor');
+(7, 'Sandy Doe', '/img/bg-img/t7.jpg', 'Senior Editor'),
+(8, 'Eric Matthews', '/img/bg-img/t8.jpg', 'Senior Editor');
 
 -- --------------------------------------------------------
 
@@ -280,7 +281,8 @@ ALTER TABLE `categories`
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`),
   ADD KEY `fk_user` (`FK_user`),
-  ADD KEY `fk_user_img` (`FK_user_img`);
+  ADD KEY `fk_user_img` (`FK_user_img`),
+  ADD KEY `FK_article_title` (`FK_article_title`);
 
 --
 -- Indexes for table `employees`
