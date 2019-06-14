@@ -96,27 +96,29 @@ module.exports = (app) => {
 
 		let db = await mysql.connect();
 
-		let [articles] = await db.execute(`
-			SELECT 
-			article_title,
+		let [singleFeaturedPosts] = await db.execute(`
+      SELECT 
 			article_excerpt,
-			article_imgs.article_img,
 			categories.category,
 			article_date_time,
-			authors.author_name,
-      authors.author_img,
       article_thumbnails.article_thumbnail
 
-			FROM articles
+      FROM articles
 
-			LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
 			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
-      LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
       LEFT OUTER JOIN article_thumbnails ON FK_article_thumbnail = article_thumbnails.article_thumbnail_id
+
+      WHERE article_id = (
+        SELECT article_id 
+        FROM articles 
+        WHERE FK_article_category = category_id
+        ORDER BY article_date_time DESC
+        LIMIT 1
+      )
 
 		`);
 
-		res.render('database', {'articles': articles});
+		res.render('database', {'singleFeaturedPosts': singleFeaturedPosts});
 
 		db.end();
 

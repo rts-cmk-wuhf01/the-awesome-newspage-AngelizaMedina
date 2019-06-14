@@ -11,11 +11,11 @@
 
 <body>
 
-	<% if (typeof articles != 'undefined') { %>
-    <% articles.forEach(article => { %>
+	<% if (typeof singleFeaturedPosts != 'undefined') { %>
+    <% singleFeaturedPosts.forEach(article => { %>
       <% let postDate = new Date(article.article_date_time); %>
 
-      <h1><%= article.article_thumbnail %></h1>
+      <h1><%= article.category %></h1>
       
       <p><%- dateAndTime.format(article.article_date_time,'[<span>]h:mm A[</span>] | [<span>]MMMM DD[</span>]') %><p>
 
