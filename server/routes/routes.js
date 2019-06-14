@@ -104,13 +104,15 @@ module.exports = (app) => {
 			categories.category,
 			article_date_time,
 			authors.author_name,
-			authors.author_img
+      authors.author_img,
+      article_thumbnails.article_thumbnail
 
 			FROM articles
 
 			LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
 			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
-			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
+      LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
+      LEFT OUTER JOIN article_thumbnails ON FK_article_thumbnail = article_thumbnails.article_thumbnail_id
 
 		`);
 
@@ -350,41 +352,6 @@ module.exports = (app) => {
 	/*------------------------------------------------------- About ------------------------------------------------*/
 	app.get('/about', async (req, res, next) => {
 
-		let teamMembers = [
-			{
-				'name': 'James Williams',
-				'img': '/img/bg-img/t1.jpg'
-			},
-			{
-				'name': 'Christinne Smith',
-				'img': '/img/bg-img/t2.jpg'
-			},
-			{
-				'name': 'Alicia Dormund',
-				'img': '/img/bg-img/t3.jpg'
-			},
-			{
-				'name': 'Steve Duncan',
-				'img': '/img/bg-img/t4.jpg'
-			},
-			{
-				'name': 'James Williams',
-				'img': '/img/bg-img/t5.jpg'
-			},
-			{
-				'name': 'Christinne Smith',
-				'img': '/img/bg-img/t6.jpg'
-			},
-			{
-				'name': 'Alicia Dormund',
-				'img': '/img/bg-img/t7.jpg'
-			},
-			{
-				'name': 'Steve Duncan',
-				'img': '/img/bg-img/t8.jpg'
-			},
-		];
-
 		let coolFacts = [
 			{
 				'title': 'News Article',
@@ -421,7 +388,7 @@ module.exports = (app) => {
 			FROM employees
 		`);
 
-		res.render('about', {'categories': categories, 'employees': employees, teamMembers, coolFacts});
+		res.render('about', {'categories': categories, 'employees': employees, coolFacts});
 
 		db.end();
 	});

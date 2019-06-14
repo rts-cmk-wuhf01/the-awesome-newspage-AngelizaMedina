@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2019 at 01:46 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Jun 14, 2019 at 11:07 AM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -36,18 +36,25 @@ CREATE TABLE `articles` (
   `FK_article_category` int(11) NOT NULL,
   `article_date_time` datetime NOT NULL,
   `FK_author_name` int(11) NOT NULL,
-  `FK_author_img` int(11) NOT NULL
+  `FK_author_img` int(11) NOT NULL,
+  `FK_article_thumbnail` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`article_id`, `article_title`, `article_excerpt`, `FK_article_img`, `FK_article_category`, `article_date_time`, `FK_author_name`, `FK_author_img`) VALUES
-(1, 'Financial news: A new company is born today at the stock market', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 25, 8, '2019-06-13 11:30:00', 1, 1),
-(2, 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 26, 1, '2019-06-13 11:30:00', 1, 1),
-(3, 'Most investors think 2018 is the peak year for stocks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 27, 3, '2019-06-13 11:30:00', 1, 1),
-(4, 'Facebook is offering facial recognition again in Europe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.\r\n\r\n', 28, 4, '2019-06-13 11:30:00', 1, 1);
+INSERT INTO `articles` (`article_id`, `article_title`, `article_excerpt`, `FK_article_img`, `FK_article_category`, `article_date_time`, `FK_author_name`, `FK_author_img`, `FK_article_thumbnail`) VALUES
+(1, 'Financial news: A new company is born today at the stock market', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 1, 8, '2019-06-13 11:30:00', 1, 1, 0),
+(2, 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 2, 1, '2019-06-13 11:30:00', 1, 1, 0),
+(3, 'Most investors think 2018 is the peak year for stocks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 3, 3, '2019-06-13 11:30:00', 1, 1, 0),
+(4, 'Facebook is offering facial recognition again in Europe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.\r\n\r\n', 4, 4, '2019-06-13 11:30:00', 1, 1, 0),
+(5, 'Dummy Title\r\n(aside - single featured post)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 1, 8, '2019-06-14 07:00:00', 1, 1, 19),
+(6, 'Dummy Title\r\n(aside - single featured post)', 'Sed a elit euismod augue semper congue sit amet ac sapien.', 2, 1, '2019-06-14 07:00:00', 1, 1, 20),
+(7, 'Dummy Title\r\n(aside - single featured posts)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 3, 5, '2019-06-14 07:00:00', 1, 1, 21),
+(8, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 4, 8, '2019-06-14 07:00:00', 1, 1, 22),
+(9, 'Dummy Title\r\n(aside - single featured posts)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 1, 6, '2019-06-14 07:00:00', 1, 1, 23),
+(10, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 2, 1, '2019-06-14 07:00:00', 1, 1, 24);
 
 -- --------------------------------------------------------
 
@@ -65,6 +72,27 @@ CREATE TABLE `article_imgs` (
 --
 
 INSERT INTO `article_imgs` (`article_img_id`, `article_img`) VALUES
+(1, '/img/bg-img/25.jpg'),
+(2, '/img/bg-img/26.jpg'),
+(3, '/img/bg-img/27.jpg'),
+(4, '/img/bg-img/28.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `article_thumbnails`
+--
+
+CREATE TABLE `article_thumbnails` (
+  `article_thumbnail_id` int(11) NOT NULL,
+  `article_thumbnail` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `article_thumbnails`
+--
+
+INSERT INTO `article_thumbnails` (`article_thumbnail_id`, `article_thumbnail`) VALUES
 (1, '/img/bg-img/1.jpg'),
 (2, '/img/bg-img/2.jpg'),
 (3, '/img/bg-img/3.jpg'),
@@ -88,14 +116,7 @@ INSERT INTO `article_imgs` (`article_img_id`, `article_img`) VALUES
 (21, '/img/bg-img/21.jpg'),
 (22, '/img/bg-img/22.jpg'),
 (23, '/img/bg-img/23.jpg'),
-(24, '/img/bg-img/24.jpg'),
-(25, '/img/bg-img/25.jpg'),
-(26, '/img/bg-img/26.jpg'),
-(27, '/img/bg-img/27.jpg'),
-(28, '/img/bg-img/28.jpg'),
-(29, '/img/bg-img/bg1.jpg'),
-(30, '/img/bg-img/footer-add.gif'),
-(31, 'hero-add.gif');
+(24, '/img/bg-img/24.jpg');
 
 -- --------------------------------------------------------
 
@@ -255,13 +276,20 @@ ALTER TABLE `articles`
   ADD KEY `FK_author_name` (`FK_author_name`),
   ADD KEY `FK_author_img` (`FK_author_img`),
   ADD KEY `article_img` (`FK_article_img`),
-  ADD KEY `FK_article_category` (`FK_article_category`);
+  ADD KEY `FK_article_category` (`FK_article_category`),
+  ADD KEY `FK_article_thumbnail` (`FK_article_thumbnail`);
 
 --
 -- Indexes for table `article_imgs`
 --
 ALTER TABLE `article_imgs`
   ADD PRIMARY KEY (`article_img_id`);
+
+--
+-- Indexes for table `article_thumbnails`
+--
+ALTER TABLE `article_thumbnails`
+  ADD PRIMARY KEY (`article_thumbnail_id`);
 
 --
 -- Indexes for table `authors`
@@ -310,13 +338,19 @@ ALTER TABLE `videos`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `article_imgs`
 --
 ALTER TABLE `article_imgs`
-  MODIFY `article_img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `article_img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `article_thumbnails`
+--
+ALTER TABLE `article_thumbnails`
+  MODIFY `article_thumbnail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `authors`
