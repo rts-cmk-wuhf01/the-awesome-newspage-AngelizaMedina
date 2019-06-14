@@ -99,7 +99,7 @@ module.exports = (app) => {
 		let [articles] = await db.execute(`
 			SELECT 
 			article_title,
-			article,
+			article_excerpt,
 			article_imgs.article_img,
 			categories.category,
 			article_date_time,
@@ -108,9 +108,9 @@ module.exports = (app) => {
 
 			FROM articles
 
-			INNER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
-			INNER JOIN categories ON FK_article_category = categories.category_id
-			INNER JOIN authors ON FK_author_name = authors.author_id
+			LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
+			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
 
 		`);
 
@@ -127,7 +127,7 @@ module.exports = (app) => {
 		let [articles] = await db.execute(`
 			SELECT categories.category
 			FROM articles
-			INNER JOIN categories ON FK_article_category = categories.category_id
+			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
 			WHERE FK_article_category = ?
 		`, [req.params.category_id]);
 
@@ -255,9 +255,9 @@ module.exports = (app) => {
 
 			FROM articles
 
-			INNER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
-			INNER JOIN categories ON FK_article_category = categories.category_id
-			INNER JOIN authors ON FK_author_name = authors.author_id
+			LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
+			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
 		`);
 
 		res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, 'categories': categories, 'articles': articles});
@@ -306,9 +306,9 @@ module.exports = (app) => {
 
 			FROM articles
 
-			INNER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
-			INNER JOIN categories ON FK_article_category = categories.category_id
-			INNER JOIN authors ON FK_author_name = authors.author_id
+			LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
+			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
 
 			WHERE FK_article_category = ?
 		`, [req.params.category_id]);
