@@ -115,7 +115,6 @@ module.exports = (app) => {
         ORDER BY article_date_time DESC
         LIMIT 1
       )
-
 		`);
 
 		res.render('database', {'singleFeaturedPosts': singleFeaturedPosts});
