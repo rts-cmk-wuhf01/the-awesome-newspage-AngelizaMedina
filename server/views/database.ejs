@@ -12,8 +12,13 @@
 <body>
 
 	<% if (typeof articles != 'undefined') { %>
-		<% articles.forEach(article => { %>
-			<h1><%= article.author_img %></h1>
+    <% articles.forEach(article => { %>
+      <% let postDate = new Date(article.article_date_time); %>
+
+      <h1><%= article.article_thumbnail %></h1>
+      
+      <p><%- dateAndTime.format(article.article_date_time,'[<span>]h:mm A[</span>] | [<span>]MMMM DD[</span>]') %><p>
+
 		<% }) %>
 	<% } %>
 
