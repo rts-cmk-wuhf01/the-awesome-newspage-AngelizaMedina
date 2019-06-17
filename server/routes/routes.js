@@ -397,18 +397,59 @@ module.exports = (app) => {
 	/*----------------------------------------------------- About end ---------------------------------------------*/
 
 	/*------------------------------------------------------ Contact ----------------------------------------------*/
-   app.get('/contact', async (req, res, next) => {
+	app.get('/contact', async (req, res, next) => {
 
-			let db = await mysql.connect();
+		let db = await mysql.connect();
 
-			let [categories] = await db.execute(`
-				SELECT category_id,
-				category
-				FROM categories
-			`);
+		let [categories] = await db.execute(`
+			SELECT category_id,
+			category
+			FROM categories
+		`);
 
-      res.render('contact', {'categories': categories});
-	 });
+		res.render('contact', {'categories': categories});
+	});
+
+	app.post('/contact', async (req, res, next) => {
+
+		let name = req.body.name;
+		let email = req.body.email;
+		let subject = req.body.subject;
+		let message = req.body.message;
+		let contactDate = new Date();
+		
+
+		let return_message = [];
+
+		if (typeof name == 'undefined' || name == '') {
+			 return_message.push('Name is missing');
+		}
+		if (email == undefined || email == '') {
+			 return_message.push('Email is missing');
+		}
+		if (subject == undefined || subject == '') {
+			 return_message.push('Subject is missing');
+		}
+		if (message == undefined || message == '') {
+			 return_message.push('Message is missing');
+		}
+
+		
+		if (return_message.length > 0) {
+			let categories = await getCategories();
+
+			res.render('contact', {
+
+				'categories': categories,
+				'return_message': return_message.join(', '),
+				'values': req.body
+			});
+			
+  	}else{
+
+      res.send(req.body);
+  	}
+ });
 	 
 	/*---------------------------------------------------- Contact end --------------------------------------------*/
 

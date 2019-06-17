@@ -15,6 +15,13 @@ app.use(logger('dev', {
 }));
 
 
+const bodyParser = require('body-parser');
+   app.use(bodyParser.json());
+   app.use(bodyParser.urlencoded({
+      extended: true
+   })
+);
+
 
 // sæt viewengine til ejs 
 app.set('view engine', 'ejs');
