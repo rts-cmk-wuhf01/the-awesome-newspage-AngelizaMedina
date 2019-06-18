@@ -90,7 +90,7 @@ let latestComments = [
 
 module.exports = (app) => {
 
-/*======================================================= TESTING ROUTES ==========================================*/
+	/*======================================================= TESTING ROUTES ==========================================*/
 
 	app.get('/database', async (req, res, next) => {
 
@@ -212,11 +212,7 @@ module.exports = (app) => {
 
 		let db = await mysql.connect();
 
-		let [categories] = await db.execute(`
-			SELECT category_id,
-			category
-			FROM categories
-		`);
+		let categories = await getCategories();
 
 		let [videos] = await db.execute(`
 			SELECT video_id,
@@ -235,16 +231,12 @@ module.exports = (app) => {
 	/*----------------------------------------------------- Home end -----------------------------------------------*/
 
 	/*-------------------------------------------------- Categories-post -------------------------------------------*/
+
   app.get('/categories-post', async (req, res, next) => {
 
 		let db = await mysql.connect();
 
-		let [categories] = await db.execute(`
-			SELECT 
-			category
-
-			FROM categories
-		`);
+		let categories = await getCategories();
 
 		let [articles] = await db.execute(`
 			SELECT 
@@ -291,11 +283,7 @@ module.exports = (app) => {
 
 		let db = await mysql.connect();
 
-		let [categories] = await db.execute(`
-			SELECT category_id,
-			category
-			FROM categories
-		`);
+		let categories = await getCategories();
 
 		let [articles] = await db.execute(`
 			SELECT
@@ -325,6 +313,7 @@ module.exports = (app) => {
 	/*------------------------------------------------ Categories-post end ----------------------------------------*/
 
 	/*---------------------------------------------------- Single-post --------------------------------------------*/
+
    app.get('/single-post', async (req, res, next) => {
 
 		let relatedPosts = [
@@ -337,11 +326,8 @@ module.exports = (app) => {
 		]
 
 		let db = await mysql.connect();
-		let [categories] = await db.execute(`
-			SELECT category_id,
-			category
-			FROM categories
-		`);
+
+		let categories = await getCategories();
 
 		res.render('single-post', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, latestComments, relatedPosts});
 		
@@ -351,6 +337,7 @@ module.exports = (app) => {
 	/*-------------------------------------------------- Single-post end ------------------------------------------*/
 
 	/*------------------------------------------------------- About ------------------------------------------------*/
+
 	app.get('/about', async (req, res, next) => {
 
 		let coolFacts = [
@@ -374,12 +361,7 @@ module.exports = (app) => {
 
 		let db = await mysql.connect();
 
-		let [categories] = await db.execute(`
-			SELECT 
-			category_id,
-			category
-			FROM categories
-		`);
+		let categories = await getCategories();
 
 		let [employees] = await db.execute(`
 			SELECT
@@ -397,15 +379,12 @@ module.exports = (app) => {
 	/*----------------------------------------------------- About end ---------------------------------------------*/
 
 	/*------------------------------------------------------ Contact ----------------------------------------------*/
+
 	app.get('/contact', async (req, res, next) => {
 
 		let db = await mysql.connect();
 
-		let [categories] = await db.execute(`
-			SELECT category_id,
-			category
-			FROM categories
-		`);
+		let categories = await getCategories();
 
 		res.render('contact', {'categories': categories});
 	});
@@ -451,6 +430,17 @@ module.exports = (app) => {
 	 
 	/*---------------------------------------------------- Contact end --------------------------------------------*/
 
-};
+	async function getCategories() {
+		let db = await mysql.connect();
+		let [categories] = await db.execute(`
+			 SELECT category_id, 
+			 category 
+			 FROM categories
+			`);
+		db.end();
+		return categories;
+	}
+
+}; //module.exports
 
 
