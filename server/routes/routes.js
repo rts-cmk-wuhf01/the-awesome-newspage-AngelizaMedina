@@ -430,6 +430,8 @@ module.exports = (app) => {
 	 
 	/*---------------------------------------------------- Contact end --------------------------------------------*/
 
+	/*----------------------------------------------------- Functions ---------------------------------------------*/
+
 	async function getCategories() {
 		let db = await mysql.connect();
 		let [categories] = await db.execute(`
@@ -440,6 +442,8 @@ module.exports = (app) => {
 		db.end();
 		return categories;
 	}
+
+	/*--------------------------------------------------- Functions end -------------------------------------------*/
 
 }; //module.exports
 

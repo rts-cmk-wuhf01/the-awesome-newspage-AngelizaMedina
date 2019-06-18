@@ -86,7 +86,7 @@
 			</li>
 			
 			<% if (typeof categories != 'undefined') { %>
-				<% categories.slice(0, 7).forEach(category => { %> <!-- Remove 'Finance' cause it wasn't included -->
+				<% categories.forEach(category => { %>
 					<li><a href="/categories-post/<%=category.category_id %>"><%= category.category %></a></li>
 				<% }) %>
 			<% } %>
