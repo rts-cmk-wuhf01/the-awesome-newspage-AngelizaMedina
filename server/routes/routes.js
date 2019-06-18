@@ -436,11 +436,9 @@ module.exports = (app) => {
 
 		
 		if (return_message.length > 0) {
-			let categories = await getCategories();
 
 			res.render('contact', {
 
-				'categories': categories,
 				'return_message': return_message.join(', '),
 				'values': req.body
 			});
