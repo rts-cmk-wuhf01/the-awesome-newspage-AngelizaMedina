@@ -429,22 +429,22 @@ module.exports = (app) => {
  });
 	 
 	/*---------------------------------------------------- Contact end --------------------------------------------*/
+	
 
-	/*----------------------------------------------------- Functions ---------------------------------------------*/
+}; //module.exports
+
+
+/*----------------------------------------------------- Functions ---------------------------------------------*/
 
 	async function getCategories() {
 		let db = await mysql.connect();
 		let [categories] = await db.execute(`
-			 SELECT category_id, 
-			 category 
-			 FROM categories
+			SELECT category_id, 
+			category 
+			FROM categories
 			`);
 		db.end();
 		return categories;
 	}
 
-	/*--------------------------------------------------- Functions end -------------------------------------------*/
-
-}; //module.exports
-
-
+/*--------------------------------------------------- Functions end -------------------------------------------*/
