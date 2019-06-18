@@ -222,6 +222,8 @@ module.exports = (app) => {
 			FROM videos
 		`);
 
+		let singleFeaturedPosts = await getSingleFeaturedPosts();
+
     res.render('home', {'categories': categories, 'videos': videos, fourMostPopularNews, singleFeaturedPosts, popularNews, editorsPicks, worldNewsPosts});
 		
 		db.end();
@@ -447,4 +449,29 @@ module.exports = (app) => {
 		return categories;
 	}
 
+	async function getSingleFeaturedPosts(){
+		let db = await mysql.connect();
+		let [singleFeaturedPosts] = await db.execute(`
+			SELECT 
+			article_excerpt,
+			categories.category,
+			article_date_time,
+			article_thumbnails.article_thumbnail
+
+			FROM articles
+
+			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
+			LEFT OUTER JOIN article_thumbnails ON FK_article_thumbnail = article_thumbnails.article_thumbnail_id
+
+			WHERE article_id = (
+				SELECT article_id 
+				FROM articles 
+				WHERE FK_article_category = category_id
+				ORDER BY article_date_time DESC
+				LIMIT 1
+				)
+			`);
+		db.end();
+		return singleFeaturedPosts;
+	}
 /*--------------------------------------------------- Functions end -------------------------------------------*/
