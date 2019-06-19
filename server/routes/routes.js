@@ -160,33 +160,6 @@ module.exports = (app) => {
 			}
 		];
 
-		let editorsPicks = [
-			{
-				'img': '/img/bg-img/1.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/2.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/3.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/4.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/5.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/6.jpg',
-				'date': '2018-02-11'
-			},
-		];
-
 		let worldNewsPosts = [
 			{
 				'img': '/img/bg-img/7.jpg',
@@ -224,7 +197,9 @@ module.exports = (app) => {
 
 		let singleFeaturedPosts = await getSingleFeaturedPosts();
 
-    res.render('home', {'categories': categories, 'videos': videos, fourMostPopularNews, singleFeaturedPosts, popularNews, editorsPicks, worldNewsPosts});
+		let editorsPicks = await getEditorsPicks();
+
+    res.render('home', {'categories': categories, 'videos': videos, fourMostPopularNews, singleFeaturedPosts, popularNews, 'editorsPicks': editorsPicks, worldNewsPosts});
 		
 		db.end();
 
@@ -470,8 +445,29 @@ module.exports = (app) => {
 				ORDER BY article_date_time DESC
 				LIMIT 1
 				)
-			`);
+		`);
 		db.end();
 		return singleFeaturedPosts;
+	}
+
+	async function getEditorsPicks() {
+		let db = await mysql.connect();
+		let [editorsPicks] = await db.execute(`
+			SELECT
+			article_title, 
+			article_date_time,
+			article_thumbnails.article_thumbnail
+
+			FROM editors_picks
+
+			LEFT OUTER JOIN articles ON FK_editors_pick_article = articles.article_id
+			LEFT OUTER JOIN article_thumbnails ON FK_article_thumbnail = article_thumbnails.article_thumbnail_id
+
+			ORDER BY article_date_time DESC
+
+			LIMIT 6
+			`);
+		db.end();
+		return editorsPicks;
 	}
 /*--------------------------------------------------- Functions end -------------------------------------------*/
