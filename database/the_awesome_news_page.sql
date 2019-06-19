@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 14, 2019 at 11:07 AM
--- Server version: 10.3.15-MariaDB
--- PHP Version: 7.3.6
+-- Vært: 127.0.0.1
+-- Genereringstid: 19. 06 2019 kl. 09:36:12
+-- Serverversion: 10.1.30-MariaDB
+-- PHP-version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `articles`
+-- Struktur-dump for tabellen `articles`
 --
 
 CREATE TABLE `articles` (
@@ -41,11 +41,11 @@ CREATE TABLE `articles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `articles`
+-- Data dump for tabellen `articles`
 --
 
 INSERT INTO `articles` (`article_id`, `article_title`, `article_excerpt`, `FK_article_img`, `FK_article_category`, `article_date_time`, `FK_author_name`, `FK_author_img`, `FK_article_thumbnail`) VALUES
-(1, 'Financial news: A new company is born today at the stock market', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 1, 8, '2019-06-13 11:30:00', 1, 1, 0),
+(1, 'Financial news: A new company is born today at the stock market', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 1, 8, '2019-06-13 11:30:00', 1, 1, 16),
 (2, 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 2, 1, '2019-06-13 11:30:00', 1, 1, 0),
 (3, 'Most investors think 2018 is the peak year for stocks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 3, 3, '2019-06-13 11:30:00', 1, 1, 0),
 (4, 'Facebook is offering facial recognition again in Europe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.\r\n\r\n', 4, 4, '2019-06-13 11:30:00', 1, 1, 0),
@@ -54,12 +54,18 @@ INSERT INTO `articles` (`article_id`, `article_title`, `article_excerpt`, `FK_ar
 (7, 'Dummy Title\r\n(aside - single featured posts)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 3, 5, '2019-06-14 07:00:00', 1, 1, 21),
 (8, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 4, 8, '2019-06-14 07:00:00', 1, 1, 22),
 (9, 'Dummy Title\r\n(aside - single featured posts)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 1, 6, '2019-06-14 07:00:00', 1, 1, 23),
-(10, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 2, 1, '2019-06-14 07:00:00', 1, 1, 24);
+(10, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 2, 1, '2019-06-14 07:00:00', 1, 1, 24),
+(11, 'Dummy Title 1\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 1, 3, '2018-02-16 00:00:00', 1, 1, 1),
+(12, 'Dummy Title 2\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 2, 6, '2018-02-15 00:00:00', 1, 1, 2),
+(13, 'Dummy Title 3\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 3, 8, '2018-02-14 00:00:00', 1, 1, 3),
+(14, 'Dummy Title 4\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 4, 4, '2018-02-13 00:00:00', 1, 1, 4),
+(15, 'Dummy Title 5\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 1, 3, '2018-02-12 00:00:00', 1, 1, 5),
+(16, 'Dummy Title 6\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 2, 5, '2018-02-11 00:00:00', 1, 1, 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article_imgs`
+-- Struktur-dump for tabellen `article_imgs`
 --
 
 CREATE TABLE `article_imgs` (
@@ -68,7 +74,7 @@ CREATE TABLE `article_imgs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `article_imgs`
+-- Data dump for tabellen `article_imgs`
 --
 
 INSERT INTO `article_imgs` (`article_img_id`, `article_img`) VALUES
@@ -80,7 +86,7 @@ INSERT INTO `article_imgs` (`article_img_id`, `article_img`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article_thumbnails`
+-- Struktur-dump for tabellen `article_thumbnails`
 --
 
 CREATE TABLE `article_thumbnails` (
@@ -89,7 +95,7 @@ CREATE TABLE `article_thumbnails` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `article_thumbnails`
+-- Data dump for tabellen `article_thumbnails`
 --
 
 INSERT INTO `article_thumbnails` (`article_thumbnail_id`, `article_thumbnail`) VALUES
@@ -121,7 +127,7 @@ INSERT INTO `article_thumbnails` (`article_thumbnail_id`, `article_thumbnail`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `authors`
+-- Struktur-dump for tabellen `authors`
 --
 
 CREATE TABLE `authors` (
@@ -133,7 +139,7 @@ CREATE TABLE `authors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `authors`
+-- Data dump for tabellen `authors`
 --
 
 INSERT INTO `authors` (`author_id`, `author_name`, `author_email`, `author_img`, `author_description`) VALUES
@@ -142,7 +148,7 @@ INSERT INTO `authors` (`author_id`, `author_name`, `author_email`, `author_img`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categories`
+-- Struktur-dump for tabellen `categories`
 --
 
 CREATE TABLE `categories` (
@@ -151,7 +157,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `categories`
+-- Data dump for tabellen `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `category`) VALUES
@@ -167,7 +173,7 @@ INSERT INTO `categories` (`category_id`, `category`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Struktur-dump for tabellen `comments`
 --
 
 CREATE TABLE `comments` (
@@ -181,7 +187,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comments`
+-- Data dump for tabellen `comments`
 --
 
 INSERT INTO `comments` (`comment_id`, `FK_user`, `FK_user_img`, `comment`, `comment_date`, `comment_time`, `FK_article_title`) VALUES
@@ -192,7 +198,30 @@ INSERT INTO `comments` (`comment_id`, `FK_user`, `FK_user_img`, `comment`, `comm
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employees`
+-- Struktur-dump for tabellen `editors_picks`
+--
+
+CREATE TABLE `editors_picks` (
+  `editors_pick_id` int(11) NOT NULL,
+  `FK_editors_pick_article` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Data dump for tabellen `editors_picks`
+--
+
+INSERT INTO `editors_picks` (`editors_pick_id`, `FK_editors_pick_article`) VALUES
+(1, 11),
+(2, 12),
+(3, 13),
+(4, 14),
+(5, 15),
+(6, 16);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur-dump for tabellen `employees`
 --
 
 CREATE TABLE `employees` (
@@ -203,7 +232,7 @@ CREATE TABLE `employees` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `employees`
+-- Data dump for tabellen `employees`
 --
 
 INSERT INTO `employees` (`employee_id`, `employee_name`, `employee_img`, `job`) VALUES
@@ -219,7 +248,7 @@ INSERT INTO `employees` (`employee_id`, `employee_name`, `employee_img`, `job`) 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur-dump for tabellen `users`
 --
 
 CREATE TABLE `users` (
@@ -233,7 +262,7 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `users`
+-- Data dump for tabellen `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `password`, `user_img`, `birthday`, `account_creation_date`) VALUES
@@ -245,7 +274,7 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `password`, `user_img
 -- --------------------------------------------------------
 
 --
--- Table structure for table `videos`
+-- Struktur-dump for tabellen `videos`
 --
 
 CREATE TABLE `videos` (
@@ -256,7 +285,7 @@ CREATE TABLE `videos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `videos`
+-- Data dump for tabellen `videos`
 --
 
 INSERT INTO `videos` (`video_id`, `video_title`, `video_src`, `video_img`) VALUES
@@ -265,11 +294,11 @@ INSERT INTO `videos` (`video_id`, `video_title`, `video_src`, `video_img`) VALUE
 (3, 'video3', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', '/img/bg-img/video3.jpg');
 
 --
--- Indexes for dumped tables
+-- Begrænsninger for dumpede tabeller
 --
 
 --
--- Indexes for table `articles`
+-- Indeks for tabel `articles`
 --
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`article_id`),
@@ -280,31 +309,31 @@ ALTER TABLE `articles`
   ADD KEY `FK_article_thumbnail` (`FK_article_thumbnail`);
 
 --
--- Indexes for table `article_imgs`
+-- Indeks for tabel `article_imgs`
 --
 ALTER TABLE `article_imgs`
   ADD PRIMARY KEY (`article_img_id`);
 
 --
--- Indexes for table `article_thumbnails`
+-- Indeks for tabel `article_thumbnails`
 --
 ALTER TABLE `article_thumbnails`
   ADD PRIMARY KEY (`article_thumbnail_id`);
 
 --
--- Indexes for table `authors`
+-- Indeks for tabel `authors`
 --
 ALTER TABLE `authors`
   ADD PRIMARY KEY (`author_id`);
 
 --
--- Indexes for table `categories`
+-- Indeks for tabel `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- Indexes for table `comments`
+-- Indeks for tabel `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment_id`),
@@ -313,77 +342,90 @@ ALTER TABLE `comments`
   ADD KEY `FK_article_title` (`FK_article_title`);
 
 --
--- Indexes for table `employees`
+-- Indeks for tabel `editors_picks`
+--
+ALTER TABLE `editors_picks`
+  ADD PRIMARY KEY (`editors_pick_id`),
+  ADD KEY `article` (`FK_editors_pick_article`);
+
+--
+-- Indeks for tabel `employees`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`employee_id`);
 
 --
--- Indexes for table `users`
+-- Indeks for tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
--- Indexes for table `videos`
+-- Indeks for tabel `videos`
 --
 ALTER TABLE `videos`
   ADD PRIMARY KEY (`video_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Brug ikke AUTO_INCREMENT for slettede tabeller
 --
 
 --
--- AUTO_INCREMENT for table `articles`
+-- Tilføj AUTO_INCREMENT i tabel `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `article_imgs`
+-- Tilføj AUTO_INCREMENT i tabel `article_imgs`
 --
 ALTER TABLE `article_imgs`
   MODIFY `article_img_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `article_thumbnails`
+-- Tilføj AUTO_INCREMENT i tabel `article_thumbnails`
 --
 ALTER TABLE `article_thumbnails`
   MODIFY `article_thumbnail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
--- AUTO_INCREMENT for table `authors`
+-- Tilføj AUTO_INCREMENT i tabel `authors`
 --
 ALTER TABLE `authors`
   MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `categories`
+-- Tilføj AUTO_INCREMENT i tabel `categories`
 --
 ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- Tilføj AUTO_INCREMENT i tabel `comments`
 --
 ALTER TABLE `comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `employees`
+-- Tilføj AUTO_INCREMENT i tabel `editors_picks`
+--
+ALTER TABLE `editors_picks`
+  MODIFY `editors_pick_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Tilføj AUTO_INCREMENT i tabel `employees`
 --
 ALTER TABLE `employees`
   MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `users`
+-- Tilføj AUTO_INCREMENT i tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `videos`
+-- Tilføj AUTO_INCREMENT i tabel `videos`
 --
 ALTER TABLE `videos`
   MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
