@@ -343,7 +343,14 @@ module.exports = (app) => {
 			
   	}else{
 
-      res.send(req.body);
+			let db = await mysql.connect();
+			let result = await db.execute(`
+			INSERT INTO messages 
+				 (sender_name, sender_email, subject, message, message_date_time) 
+			VALUES 
+				 (?,?,?,?,?)`, [name, email, subject, message, contactDate]);
+			db.end();
+      res.render('contact');
   	}
  });
 	 
