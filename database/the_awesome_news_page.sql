@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Vært: 127.0.0.1
--- Genereringstid: 19. 06 2019 kl. 09:36:12
+-- Genereringstid: 19. 06 2019 kl. 11:17:01
 -- Serverversion: 10.1.30-MariaDB
 -- PHP-version: 7.2.1
 
@@ -47,20 +47,33 @@ CREATE TABLE `articles` (
 INSERT INTO `articles` (`article_id`, `article_title`, `article_excerpt`, `FK_article_img`, `FK_article_category`, `article_date_time`, `FK_author_name`, `FK_author_img`, `FK_article_thumbnail`) VALUES
 (1, 'Financial news: A new company is born today at the stock market', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 1, 8, '2019-06-13 11:30:00', 1, 1, 16),
 (2, 'Pompeo moves to reassure skeptical Dems in bid to be US diplomat', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 2, 1, '2019-06-13 11:30:00', 1, 1, 0),
-(3, 'Most investors think 2018 is the peak year for stocks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 3, 3, '2019-06-13 11:30:00', 1, 1, 0),
-(4, 'Facebook is offering facial recognition again in Europe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.\r\n\r\n', 4, 4, '2019-06-13 11:30:00', 1, 1, 0),
-(5, 'Dummy Title\r\n(aside - single featured post)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 1, 8, '2019-06-14 07:00:00', 1, 1, 19),
-(6, 'Dummy Title\r\n(aside - single featured post)', 'Sed a elit euismod augue semper congue sit amet ac sapien.', 2, 1, '2019-06-14 07:00:00', 1, 1, 20),
-(7, 'Dummy Title\r\n(aside - single featured posts)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 3, 5, '2019-06-14 07:00:00', 1, 1, 21),
-(8, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 4, 8, '2019-06-14 07:00:00', 1, 1, 22),
-(9, 'Dummy Title\r\n(aside - single featured posts)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 1, 6, '2019-06-14 07:00:00', 1, 1, 23),
-(10, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 2, 1, '2019-06-14 07:00:00', 1, 1, 24),
+(3, 'Most investors think 2018 is the peak year for stocks', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.', 3, 3, '2019-06-13 11:30:00', 1, 1, 23),
+(4, 'Facebook is offering facial recognition again in Europe', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu metus sit amet odio sodales placerat. Sed varius leo ac leo fermentum, eu cursus nunc maximus. Integer convallis nisi nibh, et ornare neque ullamcorper ac. Nam id congue lectus, a venenatis massa. Maecenas justo libero, vulputate vel nunc id, blandit feugiat sem.\r\n\r\n', 4, 4, '2019-06-13 11:30:00', 1, 1, 22),
+(5, 'Dummy Title\r\n(aside - single featured post)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 1, 8, '2019-06-19 07:00:00', 1, 1, 19),
+(6, 'Dummy Title\r\n(aside - single featured post)', 'Sed a elit euismod augue semper congue sit amet ac sapien.', 2, 1, '2019-06-19 07:00:00', 1, 1, 20),
+(7, 'Dummy Title\r\n(aside - single featured posts)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 3, 5, '2019-06-19 07:00:00', 1, 1, 21),
+(8, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 4, 8, '2019-06-19 07:00:00', 1, 1, 22),
+(9, 'Dummy Title\r\n(aside - single featured posts)', 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.', 1, 6, '2019-06-19 07:00:00', 1, 1, 23),
+(10, 'Dummy Title\r\n(aside - single featured posts)', 'Augue semper congue sit amet ac sapien. Fusce consequat.', 2, 1, '2019-06-19 07:00:00', 1, 1, 24),
 (11, 'Dummy Title 1\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 1, 3, '2018-02-16 00:00:00', 1, 1, 1),
 (12, 'Dummy Title 2\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 2, 6, '2018-02-15 00:00:00', 1, 1, 2),
 (13, 'Dummy Title 3\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 3, 8, '2018-02-14 00:00:00', 1, 1, 3),
 (14, 'Dummy Title 4\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 4, 4, '2018-02-13 00:00:00', 1, 1, 4),
 (15, 'Dummy Title 5\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 1, 3, '2018-02-12 00:00:00', 1, 1, 5),
-(16, 'Dummy Title 6\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 2, 5, '2018-02-11 00:00:00', 1, 1, 6);
+(16, 'Dummy Title 6\r\n(Editor\'s Pick)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 2, 5, '2018-02-11 00:00:00', 1, 1, 6),
+(17, 'Dummy Title 1\r\n(World news)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 1, 5, '2018-02-05 00:00:00', 1, 1, 7),
+(18, 'Dummy Title 2\r\n(World news)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 2, 2, '2018-02-04 00:00:00', 1, 1, 8),
+(19, 'Dummy Title 3\r\n(World News)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 3, 6, '2018-02-03 00:00:00', 1, 1, 9),
+(20, 'Dummy Title 4\r\n(World News)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 4, 5, '2018-02-02 00:00:00', 1, 1, 10),
+(21, 'Dummy Title 5\r\n(World News)', 'Orci varius natoque penatibus et magnis dis parturient montes.', 1, 8, '2018-02-01 00:00:00', 1, 1, 11),
+(22, 'Dummy Title 1\r\n(Aside - Single Featured Post)', '...', 1, 1, '2019-06-20 00:00:00', 1, 1, 19),
+(23, 'Dummy Title 2\r\n(Aside - Single Featured Post)', '...', 2, 2, '2019-06-20 00:00:00', 1, 1, 20),
+(24, 'Dummy Title 3\r\n(Aside - Single Featured Post)', '...', 3, 3, '2019-06-20 00:00:00', 1, 1, 21),
+(25, 'Dummy Title 4\r\n(Aside - Single Featured Post)', '...', 4, 4, '2019-06-20 00:00:00', 1, 1, 22),
+(26, 'Dummy Title 5\r\n(Aside - Single Featured Post)', '...', 1, 5, '2019-06-20 00:00:00', 1, 1, 23),
+(27, 'Dummy Title 6\r\n(Aside - Single Featured Post)', '...', 2, 6, '2019-06-20 00:00:00', 1, 1, 24),
+(28, 'Dummy Title 7\r\n(Aside - Single Featured Post)', '...', 3, 7, '2019-06-20 00:00:00', 1, 1, 19),
+(29, 'Dummy Title 8\r\n(Aside - Single Featured Post)', '...', 4, 8, '2019-06-20 00:00:00', 1, 1, 20);
 
 -- --------------------------------------------------------
 
@@ -293,6 +306,28 @@ INSERT INTO `videos` (`video_id`, `video_title`, `video_src`, `video_img`) VALUE
 (2, 'video2', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', '/img/bg-img/video2.jpg'),
 (3, 'video3', 'https://www.youtube.com/watch?v=5BQr-j3BBzU', '/img/bg-img/video3.jpg');
 
+-- --------------------------------------------------------
+
+--
+-- Struktur-dump for tabellen `world_news`
+--
+
+CREATE TABLE `world_news` (
+  `world_news_id` int(11) NOT NULL,
+  `FK_article` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Data dump for tabellen `world_news`
+--
+
+INSERT INTO `world_news` (`world_news_id`, `FK_article`) VALUES
+(1, 17),
+(2, 18),
+(3, 19),
+(4, 20),
+(5, 21);
+
 --
 -- Begrænsninger for dumpede tabeller
 --
@@ -367,6 +402,12 @@ ALTER TABLE `videos`
   ADD PRIMARY KEY (`video_id`);
 
 --
+-- Indeks for tabel `world_news`
+--
+ALTER TABLE `world_news`
+  ADD PRIMARY KEY (`world_news_id`);
+
+--
 -- Brug ikke AUTO_INCREMENT for slettede tabeller
 --
 
@@ -374,7 +415,7 @@ ALTER TABLE `videos`
 -- Tilføj AUTO_INCREMENT i tabel `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `article_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Tilføj AUTO_INCREMENT i tabel `article_imgs`
@@ -429,6 +470,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `videos`
   MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Tilføj AUTO_INCREMENT i tabel `world_news`
+--
+ALTER TABLE `world_news`
+  MODIFY `world_news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
