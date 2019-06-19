@@ -405,6 +405,34 @@ module.exports = (app) => {
 		return singleFeaturedPosts;
 	}
 
+	async function getLattestComments(){
+		let db = await mysql.connect();
+		let [latestComments] = await db.execute(`
+			SELECT 
+			users.user_name,
+			users.user_img
+			comment,
+			comment_date_time,
+			articles.article_title
+
+			FROM comments
+
+			LEFT OUTER JOIN users ON FK_user = users.user_id
+			LEFT OUTER JOIN articles ON FK_user_img = users.user_id
+
+			WHERE article_id = (
+				SELECT article_id 
+				FROM articles 
+				WHERE FK_article_category = category_id
+				ORDER BY article_date_time DESC
+				LIMIT 1
+				)
+			LIMIT 4
+		`);
+		db.end();
+		return latestComments;
+	}
+
 	/*---------------------------------------------- Multiple pages data end ---------------------------------------*/
 
 	/*----------------------------------------------------- Home data ----------------------------------------------*/
