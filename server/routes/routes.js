@@ -344,12 +344,16 @@ module.exports = (app) => {
   	}else{
 
 			let db = await mysql.connect();
+
 			let result = await db.execute(`
 			INSERT INTO messages 
 				 (sender_name, sender_email, subject, message, message_date_time) 
 			VALUES 
 				 (?,?,?,?,?)`, [name, email, subject, message, contactDate]);
 			db.end();
+
+			return_message.push('Your message has been sent');
+
       res.render('contact');
   	}
  });
