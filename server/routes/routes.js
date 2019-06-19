@@ -24,45 +24,6 @@ let fourMostPopularNews = [
 	}
 ];
 
-let singleFeaturedPosts = [
-	{
-		'category': 'finance',
-		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
-		'img': '/img/bg-img/19.jpg',
-		'date': '04-14 07:00'
-	},
-	{
-		'category': 'politics',
-		'txt': 'Sed a elit euismod augue semper congue sit amet ac sapien.',
-		'img': '/img/bg-img/20.jpg',
-		'date': '04-14 07:00'
-	},
-	{
-		'category': 'health',
-		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
-		'img': '/img/bg-img/21.jpg',
-		'date': '04-14 07:00'
-	},
-	{
-		'category': 'finance',
-		'txt': 'Augue semper congue sit amet ac sapien. Fusce consequat.',
-		'img': '/img/bg-img/22.jpg',
-		'date': '04-14 07:00'
-	},
-	{
-		'category': 'travel',
-		'txt': 'Pellentesque mattis arcu massa, nec fringilla turpis eleifend id.',
-		'img': '/img/bg-img/23.jpg',
-		'date': '04-14 07:00'
-	},
-	{
-		'category': 'politics',
-		'txt': 'Augue semper congue sit amet ac sapien. Fusce consequat.',
-		'img': '/img/bg-img/24.jpg',
-		'date': '04-14 07:00'
-	}
-];
-
 let latestComments = [
 	{
 		'name': 'Jamie Smith',
@@ -160,46 +121,19 @@ module.exports = (app) => {
 			}
 		];
 
-		let worldNewsPosts = [
-			{
-				'img': '/img/bg-img/7.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/8.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/9.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/10.jpg',
-				'date': '2018-02-11'
-			},
-			{
-				'img': '/img/bg-img/11.jpg',
-				'date': '2018-02-11'
-			},
-		]
-
 		let db = await mysql.connect();
 
 		let categories = await getCategories();
 
-		let [videos] = await db.execute(`
-			SELECT video_id,
-			video_title,
-			video_src,
-			video_img
-			FROM videos
-		`);
+		let videos = await getVideos();
 
 		let singleFeaturedPosts = await getSingleFeaturedPosts();
 
 		let editorsPicks = await getEditorsPicks();
 
-    res.render('home', {'categories': categories, 'videos': videos, fourMostPopularNews, singleFeaturedPosts, popularNews, 'editorsPicks': editorsPicks, worldNewsPosts});
+		let worldNews = await getWorldNews();
+
+    res.render('home', {'categories': categories, 'videos': videos, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, popularNews, 'editorsPicks': editorsPicks, 'worldNews': worldNews});
 		
 		db.end();
 
@@ -214,6 +148,8 @@ module.exports = (app) => {
 		let db = await mysql.connect();
 
 		let categories = await getCategories();
+
+		let singleFeaturedPosts = await getSingleFeaturedPosts();
 
 		let [articles] = await db.execute(`
 			SELECT 
@@ -232,7 +168,7 @@ module.exports = (app) => {
 			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
 		`);
 
-		res.render('categories-post', {fourMostPopularNews, singleFeaturedPosts, latestComments, 'categories': categories, 'articles': articles});
+		res.render('categories-post', {fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, latestComments, 'categories': categories, 'articles': articles});
 		
 		db.end();
 	});
@@ -279,9 +215,13 @@ module.exports = (app) => {
 			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
 
 			WHERE FK_article_category = ?
-		`, [req.params.category_id]);
+			ORDER BY article_date_time DESC`, [req.params.category_id]
+			
+		);
 
-		res.render('categories-post', {'categories': categories, 'articles': articles, fourMostPopularNews, singleFeaturedPosts, latestComments, singleFeaturedPosts2});
+		let singleFeaturedPosts = await getSingleFeaturedPosts();
+
+		res.render('categories-post', {'categories': categories, 'articles': articles, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, latestComments, singleFeaturedPosts2});
 
 		db.end();
 
@@ -306,7 +246,9 @@ module.exports = (app) => {
 
 		let categories = await getCategories();
 
-		res.render('single-post', {'categories': categories, fourMostPopularNews, singleFeaturedPosts, latestComments, relatedPosts});
+		let singleFeaturedPosts = await getSingleFeaturedPosts();
+
+		res.render('single-post', {'categories': categories, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, latestComments, relatedPosts});
 		
 		db.end();
 	});
@@ -411,7 +353,7 @@ module.exports = (app) => {
 }; //module.exports
 
 
-/*----------------------------------------------------- Functions ---------------------------------------------*/
+/*======================================================= Functions ==============================================*/
 
 	async function getCategories() {
 		let db = await mysql.connect();
@@ -428,6 +370,7 @@ module.exports = (app) => {
 		let db = await mysql.connect();
 		let [singleFeaturedPosts] = await db.execute(`
 			SELECT 
+			article_title,
 			article_excerpt,
 			categories.category,
 			article_date_time,
@@ -450,7 +393,22 @@ module.exports = (app) => {
 		return singleFeaturedPosts;
 	}
 
-	async function getEditorsPicks() {
+	/*----------------------------------------------------- Home data ----------------------------------------------*/
+
+	async function getVideos(){
+		let db = await mysql.connect();
+		let [videos] = await db.execute(`
+			SELECT video_id,
+			video_title,
+			video_src,
+			video_img
+			FROM videos
+		`);
+		db.end();
+		return videos;
+	}
+
+	async function getEditorsPicks(){
 		let db = await mysql.connect();
 		let [editorsPicks] = await db.execute(`
 			SELECT
@@ -470,4 +428,28 @@ module.exports = (app) => {
 		db.end();
 		return editorsPicks;
 	}
-/*--------------------------------------------------- Functions end -------------------------------------------*/
+
+	async function getWorldNews(){
+		let db = await mysql.connect();
+		let [worldNews] = await db.execute(`
+			SELECT
+			article_title, 
+			article_date_time,
+			article_thumbnails.article_thumbnail
+
+			FROM world_news
+
+			LEFT OUTER JOIN articles ON FK_article = articles.article_id
+			LEFT OUTER JOIN article_thumbnails ON FK_article_thumbnail = article_thumbnails.article_thumbnail_id
+
+			ORDER BY article_date_time DESC
+
+			LIMIT 5
+			`);
+		db.end();
+		return worldNews;
+	}
+
+	/*----------------------------------------------------- Home data end -----------------------------------------*/
+
+/*===================================================== Functions end ===========================================*/
