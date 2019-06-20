@@ -63,15 +63,15 @@ module.exports = (app) => {
 
 	});
 
-	app.get('/fisk/:antalFisk/:type',  (req, res, next) => {
+	app.get('/fisk/:antal/:type',  (req, res, next) => {
 
 		let fiskData = {
-			'antal': req.params.antalFisk,
+			'antal': req.params.antal,
 			'type': req.params.type
 		}
 	
 		res.render('fisk', {
-			fiskData: fiskData //Den første 'fiskData' er navnet på objektet som kaldes i ejs filen
+			'fiskData': fiskData //Den første 'fiskData' er navnet på objektet som kaldes i ejs filen
 		});
 
 		// res.render('fisk', {fiskData}); Dette er en mere kompakt måde at skrive ovenstående. Her kan man ikke ændre navnet på objektet.
