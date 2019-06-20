@@ -63,10 +63,11 @@ module.exports = (app) => {
 
 	});
 
-	app.get('/fisk/:antalFisk',  (req, res, next) => {
+	app.get('/fisk/:antalFisk/:type',  (req, res, next) => {
 
 		let fiskData = {
-			'antal': req.params.antalFisk
+			'antal': req.params.antalFisk,
+			'type': req.params.type
 		}
 	
 		res.render('fisk', {
