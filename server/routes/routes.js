@@ -136,6 +136,7 @@ module.exports = (app) => {
 
 		let [articles] = await db.execute(`
 			SELECT 
+			article_id,
 			article_title,
 			article_excerpt,
 			article_imgs.article_img,
@@ -183,6 +184,7 @@ module.exports = (app) => {
 
 		let [articles] = await db.execute(`
 			SELECT
+			article_id,
 			article_title,
 			article_excerpt,
 			article_imgs.article_img,
@@ -231,7 +233,25 @@ module.exports = (app) => {
 
 		let singleFeaturedPosts = await getSingleFeaturedPosts();
 
-		res.render('single-post', {'categories': categories, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, latestComments, relatedPosts});
+		let [articles] = await db.execute(`
+		SELECT 
+		article_id,
+		article_title,
+		article_excerpt,
+		article_imgs.article_img,
+		categories.category,
+		article_date_time,
+		authors.author_name,
+		authors.author_img
+
+		FROM articles
+
+		LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+		LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
+		LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
+	`);
+
+		res.render('single-post', {'categories': categories, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, 'articles': articles, latestComments, relatedPosts});
 		
 		db.end();
 	});
@@ -258,7 +278,7 @@ module.exports = (app) => {
 			SELECT
 			article_id,
 			article_title,
-			article_excerpt,
+			article,
 			article_imgs.article_img,
 			categories.category,
 			article_date_time,
@@ -484,6 +504,7 @@ module.exports = (app) => {
 		let db = await mysql.connect();
 		let [editorsPicks] = await db.execute(`
 			SELECT
+			article_id,
 			article_title, 
 			article_date_time,
 			article_thumbnails.article_thumbnail
@@ -505,6 +526,7 @@ module.exports = (app) => {
 		let db = await mysql.connect();
 		let [worldNews] = await db.execute(`
 			SELECT
+			article_id,
 			article_title, 
 			article_date_time,
 			article_thumbnails.article_thumbnail
