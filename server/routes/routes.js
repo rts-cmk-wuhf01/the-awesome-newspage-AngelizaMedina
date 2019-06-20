@@ -53,6 +53,31 @@ module.exports = (app) => {
 
 	/*======================================================= TESTING ROUTES ==========================================*/
 
+	app.get('/fisk', async (req, res, next) => {
+
+		let db = await mysql.connect();
+
+		res.render('fisk');
+
+		db.end();
+
+	});
+
+	app.get('/fisk/:antalFisk',  (req, res, next) => {
+
+		let fiskData = {
+			'antal': req.params.antalFisk
+		}
+	
+		res.render('fisk', {
+			fiskData: fiskData //Den første 'fiskData' er navnet på objektet som kaldes i ejs filen
+		});
+
+		// res.render('fisk', {fiskData});
+
+	});
+
+
 	app.get('/database', async (req, res, next) => {
 
 		let db = await mysql.connect();
