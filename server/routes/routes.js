@@ -73,7 +73,7 @@ module.exports = (app) => {
 			fiskData: fiskData //Den første 'fiskData' er navnet på objektet som kaldes i ejs filen
 		});
 
-		// res.render('fisk', {fiskData});
+		// res.render('fisk', {fiskData}); Dette er en mere kompakt måde at skrive ovenstående. Her kan man ikke ændre navnet på objektet.
 
 	});
 
