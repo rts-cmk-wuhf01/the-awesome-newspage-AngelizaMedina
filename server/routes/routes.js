@@ -57,43 +57,26 @@ module.exports = (app) => {
 
 		let db = await mysql.connect();
 
-		let [singleFeaturedPosts] = await db.execute(`
-      SELECT 
-			article_excerpt,
-			categories.category,
-			article_date_time,
-      article_thumbnails.article_thumbnail
-
-      FROM articles
-
-			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
-      LEFT OUTER JOIN article_thumbnails ON FK_article_thumbnail = article_thumbnails.article_thumbnail_id
-
-      WHERE article_id = (
-        SELECT article_id 
-        FROM articles 
-        WHERE FK_article_category = category_id
-        ORDER BY article_date_time DESC
-        LIMIT 1
-      )
-		`);
-
-		res.render('database', {'singleFeaturedPosts': singleFeaturedPosts});
+		res.render('database');
 
 		db.end();
 
 	});
 	
-	app.get('/database/:category_id', async (req, res, next) => {
+	app.get('/database/:article_id', async (req, res, next) => {
 
 		let db = await mysql.connect();
 
 		let [articles] = await db.execute(`
-			SELECT categories.category
+			SELECT 
+			article_id,
+			article_title
+
 			FROM articles
-			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
-			WHERE FK_article_category = ?
-		`, [req.params.category_id]);
+
+			WHERE article_id = ?
+
+		`, [req.params.article_id]);
 
 		res.render('database', {'articles': articles});
 
@@ -252,6 +235,52 @@ module.exports = (app) => {
 		
 		db.end();
 	});
+
+
+	app.get('/single-post/:article_id', async (req, res, next) => {
+
+		let relatedPosts = [
+			{
+				'img': '/img/bg-img/12.jpg'
+			},
+			{
+				'img': '/img/bg-img/13.jpg'
+			}
+		]
+
+		let db = await mysql.connect();
+
+		let categories = await getCategories();
+
+		let singleFeaturedPosts = await getSingleFeaturedPosts();
+
+		let [articles] = await db.execute(`
+			SELECT
+			article_id,
+			article_title,
+			article_excerpt,
+			article_imgs.article_img,
+			categories.category,
+			article_date_time,
+			authors.author_name,
+			authors.author_img
+
+			FROM articles
+
+			LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
+			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
+
+			WHERE article_id = ?
+
+		`, [req.params.article_id]);
+
+		res.render('single-post', {'articles': articles, 'categories': categories, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, latestComments, relatedPosts});
+
+		db.end();
+
+	});
+
 	 
 	/*-------------------------------------------------- Single-post end ------------------------------------------*/
 
@@ -382,6 +411,7 @@ module.exports = (app) => {
 		let db = await mysql.connect();
 		let [singleFeaturedPosts] = await db.execute(`
 			SELECT 
+			article_id,
 			article_title,
 			article_excerpt,
 			categories.category,
