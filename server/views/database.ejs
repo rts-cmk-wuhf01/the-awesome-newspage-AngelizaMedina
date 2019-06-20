@@ -11,10 +11,10 @@
 
 <body>
 
-	<% if (typeof articles != 'undefined') { %>
-    <% articles.forEach(article => { %>
+	<% if (typeof comments != 'undefined') { %>
+    <% comments.forEach(comment => { %>
 
-      <h1><%= article.article_title %></h1>
+      <h1><%= comment.comment %></h1>
 
 		<% }) %>
 	<% } %>

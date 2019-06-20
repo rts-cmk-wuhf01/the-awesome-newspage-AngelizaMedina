@@ -91,22 +91,11 @@ module.exports = (app) => {
 	
 	app.get('/database/:article_id', async (req, res, next) => {
 
-		let db = await mysql.connect();
+		let comments = await getComments(req.params.article_id);
 
-		let [articles] = await db.execute(`
-			SELECT 
-			article_id,
-			article_title
-
-			FROM articles
-
-			WHERE article_id = ?
-
-		`, [req.params.article_id]);
-
-		res.render('database', {'articles': articles});
-
-		db.end();
+		res.render('database', {
+			'comments': comments
+		});
 
 	});
 
@@ -142,7 +131,14 @@ module.exports = (app) => {
 
 		let worldNews = await getWorldNews();
 
-    res.render('home', {'categories': categories, 'videos': videos, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, popularNews, 'editorsPicks': editorsPicks, 'worldNews': worldNews});
+    res.render('home', {
+			'categories': categories, 
+			'videos': videos, 
+			fourMostPopularNews, 
+			'singleFeaturedPosts': singleFeaturedPosts, 
+			popularNews, 
+			'editorsPicks': editorsPicks, 
+			'worldNews': worldNews});
 		
 		db.end();
 
@@ -178,7 +174,13 @@ module.exports = (app) => {
 			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
 		`);
 
-		res.render('categories-post', {fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, latestComments, 'categories': categories, 'articles': articles});
+		res.render('categories-post', {
+			fourMostPopularNews, 
+			'singleFeaturedPosts': singleFeaturedPosts, 
+			latestComments, 
+			'categories': categories, 
+			'articles': articles
+		});
 		
 		db.end();
 	});
@@ -232,7 +234,13 @@ module.exports = (app) => {
 
 		let singleFeaturedPosts = await getSingleFeaturedPosts();
 
-		res.render('categories-post', {'categories': categories, 'articles': articles, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, latestComments, singleFeaturedPosts2});
+		res.render('categories-post', {
+			'categories': categories, 
+			'articles': articles, 
+			fourMostPopularNews, 
+			'singleFeaturedPosts': singleFeaturedPosts, 
+			latestComments, singleFeaturedPosts2
+		});
 
 		db.end();
 
@@ -260,24 +268,31 @@ module.exports = (app) => {
 		let singleFeaturedPosts = await getSingleFeaturedPosts();
 
 		let [articles] = await db.execute(`
-		SELECT 
-		article_id,
-		article_title,
-		article_excerpt,
-		article_imgs.article_img,
-		categories.category,
-		article_date_time,
-		authors.author_name,
-		authors.author_img
+			SELECT 
+			article_id,
+			article_title,
+			article_excerpt,
+			article_imgs.article_img,
+			categories.category,
+			article_date_time,
+			authors.author_name,
+			authors.author_img
 
-		FROM articles
+			FROM articles
 
-		LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
-		LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
-		LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
-	`);
+			LEFT OUTER JOIN article_imgs ON FK_article_img = article_imgs.article_img_id
+			LEFT OUTER JOIN categories ON FK_article_category = categories.category_id
+			LEFT OUTER JOIN authors ON FK_author_name = authors.author_id
+		`);
 
-		res.render('single-post', {'categories': categories, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, 'articles': articles, latestComments, relatedPosts});
+		res.render('single-post', {
+			'categories': categories, 
+			fourMostPopularNews, 
+			'singleFeaturedPosts': singleFeaturedPosts, 
+			'articles': articles, 
+			latestComments, 
+			relatedPosts
+		});
 		
 		db.end();
 	});
@@ -321,7 +336,17 @@ module.exports = (app) => {
 
 		`, [req.params.article_id]);
 
-		res.render('single-post', {'articles': articles, 'categories': categories, fourMostPopularNews, 'singleFeaturedPosts': singleFeaturedPosts, latestComments, relatedPosts});
+		let comments = await getComments(req.params.article_id);
+
+		res.render('single-post', {
+			'articles': articles, 
+			'categories': categories, 
+			fourMostPopularNews, 
+			'singleFeaturedPosts': singleFeaturedPosts, 
+			latestComments, 
+			relatedPosts,
+			'comments': comments
+		});
 
 		db.end();
 
@@ -481,34 +506,6 @@ module.exports = (app) => {
 		return singleFeaturedPosts;
 	}
 
-	async function getLattestComments(){
-		let db = await mysql.connect();
-		let [latestComments] = await db.execute(`
-			SELECT 
-			users.user_name,
-			users.user_img
-			comment,
-			comment_date_time,
-			articles.article_title
-
-			FROM comments
-
-			LEFT OUTER JOIN users ON FK_user = users.user_id
-			LEFT OUTER JOIN articles ON FK_user_img = users.user_id
-
-			WHERE article_id = (
-				SELECT article_id 
-				FROM articles 
-				WHERE FK_article_category = category_id
-				ORDER BY article_date_time DESC
-				LIMIT 1
-				)
-			LIMIT 4
-		`);
-		db.end();
-		return latestComments;
-	}
-
 	/*---------------------------------------------- Multiple pages data end ---------------------------------------*/
 
 	/*----------------------------------------------------- Home data ----------------------------------------------*/
@@ -571,5 +568,30 @@ module.exports = (app) => {
 	}
 
 	/*---------------------------------------------------- Home data end -------------------------------------------*/
+
+
+	async function getComments(parameter){
+		let db = await mysql.connect();
+		let [comments] = await db.execute(`
+			SELECT
+			comment,
+			comment_date_time,
+			articles.article_id,
+			users.user_name,
+			users.user_img
+
+			FROM comments
+
+			LEFT OUTER JOIN articles ON FK_article = articles.article_id
+			LEFT OUTER JOIN users ON FK_user = users.user_id
+
+
+			WHERE article_id = ?
+
+		`, [parameter]);
+
+		db.end();
+		return comments;
+	}
 
 /*====================================================== Functions end ============================================*/
