@@ -16,7 +16,7 @@
 			<input
 				type="text"
 				name="category_name"
-				value="<%= typeof category != 'undefined' ? category.category_title : '' %>">
+				value="<%= typeof category != 'undefined' ? category.category : '' %>">
 			<button>Save</button>
 		</form>
 
@@ -46,6 +46,10 @@
 			</tbody>
 			<% } %>
 		</table>
+
+		<% if( typeof return_message != 'undefined'){ %>
+			<div style="color: #ff006e; font-weight: bold"><%= return_message %></div>
+		<% } %>
 
 </body>
 

@@ -433,7 +433,6 @@ module.exports = (app) => {
 			 return_message.push('Message is missing');
 		}
 
-		
 		if (return_message.length > 0) {
 
 			res.render('contact', {
