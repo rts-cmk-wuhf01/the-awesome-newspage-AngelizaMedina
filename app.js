@@ -46,7 +46,7 @@ app.locals.dateAndTime.setLocales('en', {
  * dette sker igennem en ny fil, for at splitte koden op i smartere blokke */
 require('./server/routes/routes.js')(app);
 
-require("./server/routes/admin_routes.js")(app);
+require("./server/routes/admin_categories.js")(app);
 
 /* sæt serveren op så den kan servere html/css/javascript
  * og billeder direkte fra public mappen, efter alle routes er kørt */
