@@ -29,7 +29,6 @@ app.set('view engine', 'ejs');
 app.set('views', './server/views');
 
 
-
 // npm install date-and-time --save
 app.locals.dateAndTime = require('date-and-time');
 app.locals.dateAndTime.locale('en');
@@ -46,6 +45,8 @@ app.locals.dateAndTime.setLocales('en', {
 /* indlæs alle de routes serveren skal håndtere
  * dette sker igennem en ny fil, for at splitte koden op i smartere blokke */
 require('./server/routes/routes.js')(app);
+
+require("./server/routes/admin_routes.js")(app);
 
 /* sæt serveren op så den kan servere html/css/javascript
  * og billeder direkte fra public mappen, efter alle routes er kørt */

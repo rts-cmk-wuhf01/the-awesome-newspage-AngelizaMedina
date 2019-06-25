@@ -58,4 +58,4 @@ module.exports = app => {
 
 	});
 
-};
+}; // module.export end
