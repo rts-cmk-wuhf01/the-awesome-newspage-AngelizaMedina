@@ -406,6 +406,8 @@ module.exports = (app) => {
 		let categories = await getCategories();
 
 		res.render('contact', {'categories': categories});
+
+		db.end();
 	});
 
 	app.post('/contact', async (req, res, next) => {
