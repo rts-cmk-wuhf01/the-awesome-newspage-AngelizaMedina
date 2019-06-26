@@ -51,7 +51,7 @@ module.exports = app => {
 
 			let categories = await getCategories();
 
-			return_message.push('New category has been added!');
+			return_message.push('A new category has been added!');
 
 			category_name = '';
 
