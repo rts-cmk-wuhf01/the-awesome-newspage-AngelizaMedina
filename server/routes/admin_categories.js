@@ -95,8 +95,6 @@ module.exports = app => {
 
 		let category_id = req.params.category_id;  
 
-		let return_message = [];
-
 		let [result] = await db.execute(
 			
 			`UPDATE categories 
@@ -104,19 +102,20 @@ module.exports = app => {
 			SET category = ?
 
 			WHERE category_id = ?`
+
 			,[editedCategory, category_id]
 		);
 
-		return_message.push('Chosen category has been edited!');
-
 		categories = await getCategories();
 
-		res.render('admin_categories', {
-			'categories': categories,
-			'return_message': return_message
-		});
+		//NOTE: Can't have two res.something. Get your 'return_message' with something called 'session' LATER!
+		// res.render('admin_categories', {
+		// 	'return_message': return_message
+		// });
 
 		db.end();
+
+		res.redirect("/admin/categories");
 
 	});
 	 
@@ -154,6 +153,8 @@ async function editCategory(parameter){
 		WHERE category_id = ?
 
 	`, [parameter]);
+
+	parameter = '';
 
 	db.end();
 
