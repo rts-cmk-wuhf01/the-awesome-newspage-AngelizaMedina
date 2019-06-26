@@ -27,6 +27,7 @@ module.exports = app => {
 
 		let return_message = [];
 		
+		// Add a new category to the table Categories in our database
 		if (typeof category_name == 'undefined' || category_name == '') {
 
 			return_message.push('Write a category!');
@@ -45,7 +46,8 @@ module.exports = app => {
 			INSERT INTO categories 
 				(category) 
 			VALUES 
-				(?)`, [category_name]);
+				(?)`, [category_name]
+			);
 
 			let categories = await getCategories();
 
@@ -59,8 +61,8 @@ module.exports = app => {
 			});
 
 			db.end();
-			
 		}
+		// Add a new category to the table Categories in our database END
 
    });
 	 
@@ -76,6 +78,42 @@ module.exports = app => {
 		res.render('admin_categories', {
 			'categories': categories,
 			'chosenCategory': chosenCategory
+		});
+
+		db.end();
+
+	});
+
+
+	app.post("/admin/categories/edit/:category_id", async (req, res, next) => {
+		
+		let db = await mysql.connect();
+
+		let categories = await getCategories();
+
+		let editedCategory = req.body.category_name;
+
+		let category_id = req.params.category_id;  
+
+		let return_message = [];
+
+		let [result] = await db.execute(
+			
+			`UPDATE categories 
+
+			SET category = ?
+
+			WHERE category_id = ?`
+			,[editedCategory, category_id]
+		);
+
+		return_message.push('Chosen category has been edited!');
+
+		categories = await getCategories();
+
+		res.render('admin_categories', {
+			'categories': categories,
+			'return_message': return_message
 		});
 
 		db.end();
@@ -98,8 +136,8 @@ async function getCategories(){
 		FROM categories
 
 		ORDER BY category_id
+	`);
 
-		`);
 	db.end();
 	return categories;
 }
@@ -119,8 +157,7 @@ async function editCategory(parameter){
 
 	db.end();
 
-	return chosenCategory;
-
+	return chosenCategory[0];
 }
 
 /*========================================================= Functions  end=================================================*/

@@ -14,9 +14,10 @@
 		<form method="post">
 			<label>Titel</label>
 			<input
+				style="text-transform: capitalize"
 				type="text"
 				name="category_name"
-				value="<%= typeof chosenCategory != 'undefined' ? chosenCategory[0].category : '' %>">
+				value="<%= typeof chosenCategory != 'undefined' ? chosenCategory.category : '' %>">
 			<button>Save</button>
 		</form>
 
