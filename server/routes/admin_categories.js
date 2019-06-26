@@ -122,6 +122,23 @@ module.exports = app => {
 	app.get("/admin/categories/delete/:category_id", async (req, res, next) => {
 		// benyt endpoint parameter til at slette en kategori fra databasen
 		// send bruger tilbage til kategori admin listen
+
+		let db = await mysql.connect();
+		
+		let category_id = req.params.category_id;
+
+		let [result] = await db.execute(`
+
+		DELETE FROM categories 
+		
+		WHERE category_id = ?
+
+		`, [category_id]);
+
+		db.end();
+
+		res.redirect("/admin/categories");
+
 	});
 	 
 
