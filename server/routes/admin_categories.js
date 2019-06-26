@@ -71,7 +71,7 @@ module.exports = app => {
 
 		let categories = await getCategories();
 
-		let chosenCategory = await	editCatgory(req.params.category_id);
+		let chosenCategory = await editCategory(req.params.category_id);
 
 		res.render('admin_categories', {
 			'categories': categories,
@@ -104,9 +104,9 @@ async function getCategories(){
 	return categories;
 }
 
-async function editCatgory(parameter){
+async function editCategory(parameter){
 	let db = await mysql.connect();
-	let chosenCategory = await db.execute(`
+	let [chosenCategory] = await db.execute(`
 		SELECT
 		category_id,
 		category
@@ -118,7 +118,9 @@ async function editCatgory(parameter){
 	`, [parameter]);
 
 	db.end();
+
 	return chosenCategory;
+
 }
 
 /*========================================================= Functions  end=================================================*/
