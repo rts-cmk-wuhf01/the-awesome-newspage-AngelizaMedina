@@ -106,9 +106,8 @@ module.exports = app => {
 			,[editedCategory, category_id]
 		);
 
-		categories = await getCategories();
-
 		//NOTE: Can't have two res.something. Get your 'return_message' with something called 'session' LATER!
+
 		// res.render('admin_categories', {
 		// 	'return_message': return_message
 		// });
@@ -117,6 +116,12 @@ module.exports = app => {
 
 		res.redirect("/admin/categories");
 
+	}); //app.post("/admin/categories/edit/:category_id"... END)
+
+
+	app.get("/admin/categories/delete/:category_id", async (req, res, next) => {
+		// benyt endpoint parameter til at slette en kategori fra databasen
+		// send bruger tilbage til kategori admin listen
 	});
 	 
 
