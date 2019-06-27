@@ -104,20 +104,31 @@ module.exports = app => {
 		
 		let db = await mysql.connect();
 
+		let categories = await getCategories();
+
 		let editedCategory = req.body.category_name;
 
 		let category_id = req.params.category_id;  
 
-		let [result] = await db.execute(
-			
-			`UPDATE categories 
+		let possibleDuplicate = await getPossibleDuplicate(editedCategory);
 
-			SET category = ?
+		if(possibleDuplicate.category == editedCategory){
 
-			WHERE category_id = ?`
+			res.redirect("/admin/categories");
 
-			,[editedCategory, category_id]
-		);
+		}else{
+
+			let [result] = await db.execute(
+				
+				`UPDATE categories 
+
+				SET category = ?
+
+				WHERE category_id = ?`
+
+				,[editedCategory, category_id]
+			);
+		}
 
 		//NOTE: Can't have two res.something. Get your 'return_message' with something called 'session' LATER!
 
