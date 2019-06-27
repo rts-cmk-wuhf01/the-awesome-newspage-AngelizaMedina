@@ -30,6 +30,8 @@ module.exports = app => {
 		let return_message = [];
 
 		// Add a new category to the table Categories in our database
+
+		//Check if something has been written in the input field
 		if (typeof category_name == 'undefined' || category_name == '') {
 
 			return_message.push('Write a new category before saving!');
@@ -40,6 +42,7 @@ module.exports = app => {
 				'return_message': return_message
 			});
 
+		// Check if the 'new category' already exists in our database
 		}else if(possibleDuplicate.category == category_name){
 
 			return_message.push('The category does already exist!');
