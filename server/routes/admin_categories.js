@@ -25,8 +25,6 @@ module.exports = app => {
 
 		let category_name = req.body.category_name;
 
-		let possibleDuplicate = await getPossibleDuplicate(category_name);
-
 		let return_message = [];
 
 		// Add a new category to the table Categories in our database
@@ -35,17 +33,6 @@ module.exports = app => {
 		if (typeof category_name == 'undefined' || category_name == '') {
 
 			return_message.push('Write a new category before saving!');
-
-			res.render('admin_categories', {
-				'categories': categories,
-				'category': req.body,
-				'return_message': return_message
-			});
-
-		// Check if the 'new category' already exists in our database
-		}else if(possibleDuplicate.category == category_name){
-
-			return_message.push('The category does already exist!');
 
 			res.render('admin_categories', {
 				'categories': categories,
@@ -104,31 +91,21 @@ module.exports = app => {
 		
 		let db = await mysql.connect();
 
-		let categories = await getCategories();
-
 		let editedCategory = req.body.category_name;
 
 		let category_id = req.params.category_id;  
 
-		let possibleDuplicate = await getPossibleDuplicate(editedCategory);
+		let [result] = await db.execute(
+			
+			`UPDATE categories 
 
-		if(possibleDuplicate.category == editedCategory){
+			SET category = ?
 
-			res.redirect("/admin/categories");
+			WHERE category_id = ?`
 
-		}else{
+			,[editedCategory, category_id]
+		);
 
-			let [result] = await db.execute(
-				
-				`UPDATE categories 
-
-				SET category = ?
-
-				WHERE category_id = ?`
-
-				,[editedCategory, category_id]
-			);
-		}
 
 		//NOTE: Can't have two res.something. Get your 'return_message' with something called 'session' LATER!
 
@@ -209,19 +186,3 @@ async function editCategory(parameter){
 
 /*========================================================= Functions  end=================================================*/
 
-async function getPossibleDuplicate(categoryToBeChecked){
-
-	let db = await mysql.connect();
-	let [possibleDuplicate] = await db.execute(`
-		SELECT
-		category_id,
-		category
-
-		FROM categories
-
-		WHERE category = '${categoryToBeChecked}'
-	`);
-	db.end();
-
-	return possibleDuplicate[0];
-}
