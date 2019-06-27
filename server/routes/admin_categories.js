@@ -25,12 +25,24 @@ module.exports = app => {
 
 		let category_name = req.body.category_name;
 
+		let possibleDuplicate = await getPossibleDuplicate(category_name);
+
 		let return_message = [];
-		
+
 		// Add a new category to the table Categories in our database
 		if (typeof category_name == 'undefined' || category_name == '') {
 
-			return_message.push('Write a category!');
+			return_message.push('Write a new category before saving!');
+
+			res.render('admin_categories', {
+				'categories': categories,
+				'category': req.body,
+				'return_message': return_message
+			});
+
+		}else if(possibleDuplicate.category == category_name){
+
+			return_message.push('The category does already exist!');
 
 			res.render('admin_categories', {
 				'categories': categories,
@@ -88,8 +100,6 @@ module.exports = app => {
 	app.post("/admin/categories/edit/:category_id", async (req, res, next) => {
 		
 		let db = await mysql.connect();
-
-		let categories = await getCategories();
 
 		let editedCategory = req.body.category_name;
 
@@ -184,3 +194,20 @@ async function editCategory(parameter){
 }
 
 /*========================================================= Functions  end=================================================*/
+
+async function getPossibleDuplicate(categoryToBeChecked){
+
+	let db = await mysql.connect();
+	let [possibleDuplicate] = await db.execute(`
+		SELECT
+		category_id,
+		category
+
+		FROM categories
+
+		WHERE category = '${categoryToBeChecked}'
+	`);
+	db.end();
+
+	return possibleDuplicate[0];
+}
