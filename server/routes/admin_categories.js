@@ -106,34 +106,75 @@ module.exports = app => {
 
 
 	app.post("/admin/categories/edit/:category_id", async (req, res, next) => {
-		
-		let db = await mysql.connect();
 
+		let return_message = [];
+
+		let categories = await getCategories();
+
+		// Get the input from the input field called 'category_name'
 		let editedCategory = req.body.category_name;
 
 		let category_id = req.params.category_id;  
 
-		let [result] = await db.execute(
+		if (typeof editedCategory == 'undefined' || editedCategory == '') {
+
+			return_message.push("You can't change the category to nothing!");
+
+			res.render('admin_categories', {
+				'categories': categories,
+				'chosenCategory': req.body,
+				'return_message': return_message
+			});
+
+		}else{
+
+			let db = await mysql.connect();
+		
+			let [possibleDuplicate] = await db.execute(`
+				SELECT
+				category_id,
+				category
+		
+				FROM categories
+		
+				WHERE category = '${editedCategory}'
+			`);
+		
+			if(typeof possibleDuplicate[0] == 'undefined'){
+		
+				let [result] = await db.execute(
 			
-			`UPDATE categories 
-
-			SET category = ?
-
-			WHERE category_id = ?`
-
-			,[editedCategory, category_id]
-		);
-
+					`UPDATE categories 
+		
+					SET category = ?
+		
+					WHERE category_id = ?`
+		
+					,[editedCategory, category_id]
+				);
+		
+				db.end();
+		
+				res.redirect('/admin/categories');
+		
+			// If the 'new category' does exists, then don't add it to the database
+			}else{
+		
+				return_message.push('The category does already exist!');
+		
+				res.render('admin_categories', {
+					'categories': categories,
+					'category': req.body,
+					'return_message': return_message
+				});
+			}
+		}
 
 		//NOTE: Can't have two res.something. Get your 'return_message' with something called 'session' LATER!
 
 		// res.render('admin_categories', {
 		// 	'return_message': return_message
 		// });
-
-		db.end();
-
-		res.redirect("/admin/categories");
 
 	}); //app.post("/admin/categories/edit/:category_id"... END)
 
