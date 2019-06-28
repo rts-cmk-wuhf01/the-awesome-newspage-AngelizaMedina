@@ -4,7 +4,7 @@ const mysql = require("../config/mysql");
 
 module.exports = app => {
 
-	/*------------------------------------------------ Page that shows all our categories -------------------------------------*/
+	/*---------------------------------------- Thingy that adds a new category to our database --------------------------------*/
 
    app.get('/admin/categories', async (req, res, next) => {
 
@@ -20,9 +20,6 @@ module.exports = app => {
 
 	 });
 
-	/*--------------------------------------------- Page that shows all our categories END ------------------------------------*/
-	 
-	/*---------------------------------------- Thingy that adds a new category to our database --------------------------------*/
 
 	 app.post('/admin/categories', async (req, res, next) => {
 
@@ -86,8 +83,9 @@ module.exports = app => {
 		}
 	 }); // app.post('/admin/categories'...) END
 	 
-	/*------------------------------------ Thingy that adds a new category to our database END --------------------------------*/
+	/*------------------------------------ Page that adds a new category to our database END --------------------------------*/
 	 
+	/*-------------------------------- Page that edits an already existing category in our database -------------------------*/
 
 	 app.get("/admin/categories/edit/:category_id", async (req, res, next) => {
 
@@ -139,6 +137,9 @@ module.exports = app => {
 
 	}); //app.post("/admin/categories/edit/:category_id"... END)
 
+	/*----------------------------- Page that edits an already existing category in our database END ------------------------*/
+
+	/*-------------------------------------- Page that deletes a category from our database ---------------------------------*/
 
 	app.get("/admin/categories/delete/:category_id", async (req, res, next) => {
 
@@ -159,6 +160,8 @@ module.exports = app => {
 		res.redirect("/admin/categories");
 
 	});
+
+	/*------------------------------------ Page that deletes a category from our database END -------------------------------*/
 	 
 
 }; // module.export end
@@ -201,7 +204,6 @@ async function editCategory(parameter){
 
 	return chosenCategory[0];
 }
-//Politics
 
 /*========================================================= Functions  end=================================================*/
 
