@@ -4,6 +4,8 @@ const mysql = require("../config/mysql");
 
 module.exports = app => {
 
+	/*------------------------------------------------ Page that shows all our categories -------------------------------------*/
+
    app.get('/admin/categories', async (req, res, next) => {
 
 		let db = await mysql.connect();
@@ -17,7 +19,10 @@ module.exports = app => {
 		db.end();
 
 	 });
+
+	/*--------------------------------------------- Page that shows all our categories END ------------------------------------*/
 	 
+	/*---------------------------------------- Thingy that adds a new category to our database --------------------------------*/
 
 	 app.post('/admin/categories', async (req, res, next) => {
 
@@ -26,8 +31,6 @@ module.exports = app => {
 		let category_name = req.body.category_name;
 
 		let return_message = [];
-
-		// Add a new category to the table Categories in our database
 
 		//Check if something has been written in the input field
 		if (typeof category_name == 'undefined' || category_name == '') {
@@ -44,6 +47,7 @@ module.exports = app => {
 
 			let db = await mysql.connect();
 		
+			// Check if the 'new category' already exists in the database
 			let [possibleDuplicate] = await db.execute(`
 				SELECT
 				category_id,
@@ -54,6 +58,7 @@ module.exports = app => {
 				WHERE category = '${category_name}'
 			`);
 		
+			// If the 'new category' doesn't exists, then add it to the database
 			if(typeof possibleDuplicate[0] == 'undefined'){
 		
 				let result = await db.execute(`
@@ -67,6 +72,7 @@ module.exports = app => {
 		
 				res.redirect('/admin/categories');
 		
+			// If the 'new category' does exists, then don't add it to the database
 			}else{
 		
 				return_message.push('The category does already exist!');
@@ -78,34 +84,9 @@ module.exports = app => {
 				});
 			}
 		}
-
-		// }else{
-
-		// 	let db = await mysql.connect();
-
-		// 	let result = await db.execute(`
-		// 	INSERT INTO categories 
-		// 		(category) 
-		// 	VALUES 
-		// 		(?)`, [category_name]
-		// 	);
-
-		// 	let categories = await getCategories();
-
-		// 	return_message.push('A new category has been added!');
-
-		// 	category_name = '';
-
-		// 	res.render('admin_categories', {
-		// 		'categories': categories,
-		// 		'return_message': return_message
-		// 	});
-
-		// 	db.end();
-		// }
-		// Add a new category to the table Categories in our database END
-
-   });
+	 }); // app.post('/admin/categories'...) END
+	 
+	/*------------------------------------ Thingy that adds a new category to our database END --------------------------------*/
 	 
 
 	 app.get("/admin/categories/edit/:category_id", async (req, res, next) => {
