@@ -43,27 +43,66 @@ module.exports = app => {
 		}else{
 
 			let db = await mysql.connect();
-
-			let result = await db.execute(`
-			INSERT INTO categories 
-				(category) 
-			VALUES 
-				(?)`, [category_name]
-			);
-
-			let categories = await getCategories();
-
-			return_message.push('A new category has been added!');
-
-			category_name = '';
-
-			res.render('admin_categories', {
-				'categories': categories,
-				'return_message': return_message
-			});
-
-			db.end();
+		
+			let [possibleDuplicate] = await db.execute(`
+				SELECT
+				category_id,
+				category
+		
+				FROM categories
+		
+				WHERE category = '${category_name}'
+			`);
+		
+			if(typeof possibleDuplicate[0] == 'undefined'){
+		
+				let result = await db.execute(`
+				INSERT INTO categories 
+					(category) 
+				VALUES 
+					(?)`, [category_name]
+				);
+		
+				db.end();
+		
+				res.redirect('/admin/categories');
+		
+			}else{
+		
+				return_message.push('The category does already exist!');
+		
+				res.render('admin_categories', {
+					'categories': categories,
+					'category': req.body,
+					'return_message': return_message
+				});
+			}
 		}
+
+		// }else{
+
+		// 	let db = await mysql.connect();
+
+		// 	let result = await db.execute(`
+		// 	INSERT INTO categories 
+		// 		(category) 
+		// 	VALUES 
+		// 		(?)`, [category_name]
+		// 	);
+
+		// 	let categories = await getCategories();
+
+		// 	return_message.push('A new category has been added!');
+
+		// 	category_name = '';
+
+		// 	res.render('admin_categories', {
+		// 		'categories': categories,
+		// 		'return_message': return_message
+		// 	});
+
+		// 	db.end();
+		// }
 		// Add a new category to the table Categories in our database END
 
    });
@@ -121,8 +160,6 @@ module.exports = app => {
 
 
 	app.get("/admin/categories/delete/:category_id", async (req, res, next) => {
-		// benyt endpoint parameter til at slette en kategori fra databasen
-		// send bruger tilbage til kategori admin listen
 
 		let db = await mysql.connect();
 		
@@ -183,6 +220,27 @@ async function editCategory(parameter){
 
 	return chosenCategory[0];
 }
+//Politics
 
 /*========================================================= Functions  end=================================================*/
 
+/* 
+------x-------------x
+-----xxx-----------xx
+----xxxxx---------xxxx
+----xxxxx--------xxxxx
+----xxxxx-------xxxxxx-----------x
+-----xxxxxxxxxxxxxxxxx-----------xx
+----xxxxxxxxxxxxxxxxx-----------xxxx
+---xxxxxxxxxxxxxxxxxx-----------xxxxx
+--xxxxxxxxxxxxxxxxxxx----------xxxxxxxx
+--xxxxxxxxxxxxxxxxxxxx--------xxxxx
+---xxxxxxxxxxxxxxxxxxxxx----xxxxxxx
+--xxxxxxxxxxxxxxxxxxxxxxx------xxxxxxxx
+--xxxxxxxxxxxxxxxxxxxxxxxx-----xxxxxx
+--xxxxxxxxxxxxxxxxxxxxxxxx--xxxxxx
+--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+---xxxxxxxxxxxxxxxxxxxxxxxx
+---xxxxxxxxxxxxxxxxxxxxxxx
+--xxxxxxx---xxxxxxxxxxxx
+*/
