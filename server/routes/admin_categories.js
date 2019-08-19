@@ -164,7 +164,7 @@ module.exports = app => {
 		
 				res.render('admin_categories', {
 					'categories': categories,
-					'category': req.body,
+					'chosenCategory': req.body,
 					'return_message': return_message
 				});
 			}
